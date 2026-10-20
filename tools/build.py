@@ -299,11 +299,11 @@ def page_html(idx, title, body, toc):
     hero = ''
     if slug == 'index':
         hero = ('<section class="hero"><span class="eyebrow">Two frameworks. One gameplay workflow.</span>'
-                '<h1 id="introduction">State in PlayMaker.<br><span>Gameplay in Game Creator.</span></h1>'
+                '<h1 id="introduction"><span class="hero-playmaker">State in PlayMaker.</span><br><span>Gameplay in Game Creator.</span></h1>'
                 '<p class="hero-lead">Connect your state machines to native Actions, Conditions, Properties, and Signals—with explicit control over context, data, and execution.</p>'
                 '<div class="hero-actions"><a class="button primary" href="getting-started.html">Build your first workflow →</a>'
                 '<a class="button secondary" href="examples.html">Explore the examples</a></div>'
-                '<div class="feature-chips"><span>PlayMaker 2</span><span>Game Creator 2 Core</span><span>Unity 6</span><span>v1.1.3</span></div></section>')
+                '<div class="feature-chips"><span class="chip-playmaker">PlayMaker 2</span><span class="chip-gc2">Game Creator 2 Core</span><span>Unity 6</span><span>v1.1.3</span></div></section>')
         body = re.sub(r'^<h1\b.*?</h1>\s*', '', body, count=1, flags=re.S)
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -312,7 +312,7 @@ def page_html(idx, title, body, toc):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)} · {PRODUCT}</title>
 <meta name="description" content="{html.escape(desc)}">
-<meta name="theme-color" content="#f4faff">
+<meta name="theme-color" content="#f7f9fc">
 <link rel="canonical" href="{SITE}{slug}.html">
 <meta property="og:title" content="{html.escape(title)} · PlayMaker GC2">
 <meta property="og:description" content="{html.escape(desc)}">

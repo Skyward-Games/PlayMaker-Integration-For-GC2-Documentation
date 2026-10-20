@@ -10,7 +10,7 @@ English documentation for **PlayMaker GC2 v1.1.3**, by Skyward Games.
 
 Eighteen pages cover installation, framework ownership and context, the Integration Workspace, both scripting directions, variables and Property Binder, events, callable routines, Singletons, utilities, optional modules, C#, six reference scenes, troubleshooting, compatibility, and release history.
 
-The site uses Asset References documentation as its main layout reference and Animation Montages documentation for introductory presentation and walkthrough structure. It retains its own PlayMaker cyan styling.
+The site uses Asset References documentation as its main layout reference and Animation Montages documentation for introductory presentation and walkthrough structure. Its palette follows the asset icon: PlayMaker red, Game Creator blue, and white, with readable variants for light and dark themes.
 
 ## Edit and Build
 
