@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripting API · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Use confirmed public PlayMakerGC2 types and signatures in custom C# and GC2 Instructions.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/scripting-api.html">
+<meta property="og:title" content="Scripting API · PlayMaker GC2">
+<meta property="og:description" content="Use confirmed public PlayMakerGC2 types and signatures in custom C# and GC2 Instructions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/scripting-api.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link active" aria-current="page" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Reference</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="scripting-api">Scripting API<a aria-label="Link to Scripting API" class="anchor" href="#scripting-api">#</a></h1>
+
+<p>The integration exposes public runtime types through the <strong>PlayMakerGC2.Core.Runtime</strong> assembly. Most core types are in <code>PlayMakerGC2.Runtime</code>; routines, binding, and gameplay events use the more specific namespaces listed below.</p>
+
+<h2 id="runtime-types">Runtime Types<a aria-label="Link to Runtime Types" class="anchor" href="#runtime-types">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Type</th>
+<th scope="col">Namespace</th>
+<th scope="col">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlayMakerFsmTarget</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Resolve exactly one FSM on a target object.</td>
+</tr>
+<tr>
+<td><code>FsmResolutionResult</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Inspect success, status, component, and error.</td>
+</tr>
+<tr>
+<td><code>PlayMakerVariableReference</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Resolve typed LocalFsm, GlobalAsset, or Singleton variables.</td>
+</tr>
+<tr>
+<td><code>VariableNumberConversion</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Checked Float/double/integer conversions.</td>
+</tr>
+<tr>
+<td><code>Gc2Context</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Resolve GC2 Args Self and Target from an FSM context.</td>
+</tr>
+<tr>
+<td><code>InstructionPlayMakerSendEvent</code></td>
+<td><code>PlayMakerGC2.Runtime</code></td>
+<td>Native GC2 local event Instruction.</td>
+</tr>
+<tr>
+<td><code>GameplayRoutine</code>, <code>GameplayRoutineRunner</code></td>
+<td><code>PlayMakerGC2.Core.Runtime.Routines</code></td>
+<td>Typed reusable routine definition and runner.</td>
+</tr>
+<tr>
+<td><code>PlayMakerGc2BindingComponent</code></td>
+<td><code>PlayMakerGC2.Core.Runtime.Binding</code></td>
+<td>Configured Property Binder.</td>
+</tr>
+<tr>
+<td><code>GameplayEvent</code>, <code>GameplayEventPayload</code></td>
+<td><code>PlayMakerGC2.Core.Runtime.Events</code></td>
+<td>Reusable typed event definitions/data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Custom code in an assembly definition needs references to the integration, Unity, PlayMaker, and GC2 assemblies used by that code. Keep editor code in an editor-only assembly. Optional module types require the separate module assembly and installed dependencies.</p>
+
+<h2 id="resolve-and-send-an-event">Resolve and Send an Event<a aria-label="Link to Resolve and Send an Event" class="anchor" href="#resolve-and-send-an-event">#</a></h2>
+
+<p>This complete component uses the same strict resolver as the integration's native Instruction. Save it as <code>DoorEventSender.cs</code> and assign a door in the Inspector.</p>
+
+<pre><code class="language-csharp">using PlayMakerGC2.Runtime;
+using UnityEngine;
+
+public sealed class DoorEventSender : MonoBehaviour
+{
+    [SerializeField] private GameObject door;
+    [SerializeField] private string fsmName = "Door State FSM";
+
+    public void OpenDoor()
+    {
+        var target = new PlayMakerFsmTarget(door, fsmName);
+        FsmResolutionResult result = target.Resolve();
+        if (!result.IsSuccess)
+        {
+            Debug.LogWarning(result.ErrorMessage, this);
+            return;
+        }
+
+        result.Component.SendEvent("Interact");
+    }
+}
+</code></pre>
+
+<p>A successful lookup proves identity, not delivery or transition. PlayMaker's active graph still decides how to handle <code>Interact</code>.</p>
+
+<h2 id="public-resolution-signatures">Public Resolution Signatures<a aria-label="Link to Public Resolution Signatures" class="anchor" href="#public-resolution-signatures">#</a></h2>
+
+<pre><code class="language-csharp">// PlayMakerFsmTarget
+public PlayMakerFsmTarget(GameObject gameObject, string fsmName = null);
+public FsmResolutionResult Resolve();
+public FsmResolutionResult Resolve(GameObject runtimeTarget);
+public static BaseFsmComponent ResolveFsm(
+    GameObject target, string fsmName, out string error);
+public void Invalidate();
+</code></pre>
+
+<p>This block is a signature reference, not a standalone class. <code>BaseFsmComponent</code> is in <code>HutongGames.PlayMaker</code>. Results distinguish Success, MissingTarget, NotFound, and Ambiguous. Failed lookups can be retried after correcting the configuration.</p>
+
+<h2 id="create-a-gc2-instruction">Create a GC2 Instruction<a aria-label="Link to Create a GC2 Instruction" class="anchor" href="#create-a-gc2-instruction">#</a></h2>
+
+<p>Save this complete example as <code>InstructionOpenNamedDoor.cs</code>. Its selector evaluates the door from incoming GC2 Args and sends the event only after strict resolution.</p>
+
+<pre><code class="language-csharp">using System;
+using System.Threading.Tasks;
+using GameCreator.Runtime.Common;
+using GameCreator.Runtime.VisualScripting;
+using PlayMakerGC2.Runtime;
+using UnityEngine;
+
+[Serializable]
+[Title("Open Named Door")]
+[Category("Examples/Open Named Door")]
+public sealed class InstructionOpenNamedDoor : Instruction
+{
+    [SerializeField] private PropertyGetGameObject door =
+        GetGameObjectSelf.Create();
+    [SerializeField] private string fsmName = "Door State FSM";
+
+    protected override Task Run(Args args)
+    {
+        var target = new PlayMakerFsmTarget(door.Get(args), fsmName);
+        FsmResolutionResult result = target.Resolve();
+        if (result.IsSuccess)
+            result.Component.SendEvent("Interact");
+        else
+            Debug.LogWarning(result.ErrorMessage);
+
+        return DefaultResult;
+    }
+}
+</code></pre>
+
+<h2 id="checked-numeric-conversion">Checked Numeric Conversion<a aria-label="Link to Checked Numeric Conversion" class="anchor" href="#checked-numeric-conversion">#</a></h2>
+
+<p>Use the public <code>VariableNumberConversion.TryDoubleToFloat(double, out float)</code> and <code>TryFloatToDouble(float, out double)</code> methods when crossing the Float/Number boundary. Both reject non-finite values; narrowing also checks range.</p>
+
+<p>The <code>BridgeVariableType</code> enum supports more types than any individual action. Choose the actual action/property contract rather than assuming every enum type is accepted by every transfer.</p>
+
+<h2 id="gameplay-routine-entry-point">Gameplay Routine Entry Point<a aria-label="Link to Gameplay Routine Entry Point" class="anchor" href="#gameplay-routine-entry-point">#</a></h2>
+
+<p><code>GameplayRoutineRunner.ExecuteAsync</code> takes a <code>GameplayRoutine</code>, <code>BaseFsmComponent</code>, optional input dictionary, output dictionary, policy override, and CancellationToken. It returns <code>Task&lt;GameplayRoutineResult&gt;</code>. <code>ExecuteRoutineAsync</code> exposes the same parameter signature.</p>
+
+<p>Call on Unity's gameplay thread with valid authored objects. Inspect the result before consuming output values. Join, restart, ownership, and cancellation rules still apply; see <a href="callable-routines.html">Callable Routines</a>.</p>
+
+<h2 id="extension-boundaries">Extension Boundaries<a aria-label="Link to Extension Boundaries" class="anchor" href="#extension-boundaries">#</a></h2>
+
+<p>Use native GC2 Instructions/Conditions/Properties and PlayMaker actions as your extension points. Do not rely on internal editor adapters or serialized private fields. There is no generic type-adapter registration API documented here; conversion support follows the current typed implementations.</p>
+
+<p>For the complete behavior contracts, use the workflow pages and test against the specific dependency versions in <a href="compatibility.html">Compatibility</a>.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="optional-modules.html"><span class="label">Previous</span><span class="title">Optional Modules ←</span></a><a class="next" href="examples.html"><span class="label">Next</span><span class="title">Examples &amp; Walkthroughs →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/scripting-api.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#runtime-types">Runtime Types</a>
+<a class="toc-h2" href="#resolve-and-send-an-event">Resolve and Send an Event</a>
+<a class="toc-h2" href="#public-resolution-signatures">Public Resolution Signatures</a>
+<a class="toc-h2" href="#create-a-gc2-instruction">Create a GC2 Instruction</a>
+<a class="toc-h2" href="#checked-numeric-conversion">Checked Numeric Conversion</a>
+<a class="toc-h2" href="#gameplay-routine-entry-point">Gameplay Routine Entry Point</a>
+<a class="toc-h2" href="#extension-boundaries">Extension Boundaries</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

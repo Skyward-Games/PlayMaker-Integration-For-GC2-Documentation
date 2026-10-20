@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Diagnose missing or ambiguous FSMs, variables, busy Actions, signal routing, binding, and module imports.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/troubleshooting.html">
+<meta property="og:title" content="Troubleshooting · PlayMaker GC2">
+<meta property="og:description" content="Diagnose missing or ambiguous FSMs, variables, busy Actions, signal routing, binding, and module imports.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/troubleshooting.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link active" aria-current="page" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Learn & support</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="troubleshooting">Troubleshooting<a aria-label="Link to Troubleshooting" class="anchor" href="#troubleshooting">#</a></h1>
+
+<p>Start with the Unity Console, then reproduce one interaction in the workspace's <strong>Execution Trace</strong>. Inspect the actual resolved objects and identities before changing the graph.</p>
+
+<h2 id="diagnostic-codes">Diagnostic Codes<a aria-label="Link to Diagnostic Codes" class="anchor" href="#diagnostic-codes">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Code</th>
+<th scope="col">Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MissingTarget</code></td>
+<td>Target property/variable currently resolves to a live GameObject.</td>
+</tr>
+<tr>
+<td><code>FsmNotFound</code></td>
+<td>Exact FSM name, object, and component lifetime.</td>
+</tr>
+<tr>
+<td><code>FsmAmbiguous</code></td>
+<td>Multiple matching components; supply a unique name.</td>
+</tr>
+<tr>
+<td><code>MissingIdentifier</code></td>
+<td>Event, state, or variable identifier is filled and valid.</td>
+</tr>
+<tr>
+<td><code>ActionsBusy</code></td>
+<td>Existing run and Reject/Join policy.</td>
+</tr>
+<tr>
+<td><code>ActionsLifecycleFailure</code></td>
+<td>Actions reference, lifecycle, context, and underlying message.</td>
+</tr>
+<tr>
+<td><code>ConditionsValidationFailure</code></td>
+<td>Conditions configuration and context; separate error from false.</td>
+</tr>
+<tr>
+<td><code>VariableOwnerMissing</code></td>
+<td>Local owner or global asset is assigned.</td>
+</tr>
+<tr>
+<td><code>VariableNotFound</code></td>
+<td>Variable identity/path and scope.</td>
+</tr>
+<tr>
+<td><code>VariableAmbiguous</code></td>
+<td>Duplicate or non-unique variable identity.</td>
+</tr>
+<tr>
+<td><code>VariableTypeMismatch</code></td>
+<td>Correct typed action/property and destination type.</td>
+</tr>
+<tr>
+<td><code>VariableConversionFailure</code></td>
+<td>Range, finite values, and compatible references.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>The record's operation, target, identifier, expected type, remediation, and message provide context. Some logs are rate-limited; a repeated failure does not necessarily produce one message per frame.</p>
+
+<h2 id="my-fsm-does-not-receive-the-event">My FSM Does Not Receive the Event<a aria-label="Link to My FSM Does Not Receive the Event" class="anchor" href="#my-fsm-does-not-receive-the-event">#</a></h2>
+
+<ol>
+<li>Inspect the runtime Target object and exact FSM Name.</li>
+<li>Confirm the event's spelling and an active transition/handler.</li>
+<li>Check enabled/active state and PlayMaker startup semantics.</li>
+<li>Distinguish local events, bridge broadcasts, native global event assets, and GC2 Signals.</li>
+<li>Remove unintended event echoes and repeat with Trace.</li>
+</ol>
+
+<p>The bridge does not retain arbitrary events for disabled FSMs.</p>
+
+<h2 id="multiple-fsms-or-renamed-components">Multiple FSMs or Renamed Components<a aria-label="Link to Multiple FSMs or Renamed Components" class="anchor" href="#multiple-fsms-or-renamed-components">#</a></h2>
+
+<p>Blank names succeed only with one matching FSM. Duplicate names are ambiguous even if the component used to resolve successfully. Rename to unique identities or use an explicitly chosen search utility.</p>
+
+<p>Failed lookup results are not permanently cached. Correcting the identity allows the next access to retry.</p>
+
+<h2 id="gc2-actions-are-busy-or-do-not-stop">GC2 Actions Are Busy or Do Not Stop<a aria-label="Link to GC2 Actions Are Busy or Do Not Stop" class="anchor" href="#gc2-actions-are-busy-or-do-not-stop">#</a></h2>
+
+<p>Reject leaves an existing run unchanged and can send Busy Event. Join requires waiting and does not own/cancel the existing run. Detached runs continue after the PlayMaker action finishes.</p>
+
+<p>Owned cancellation is cooperative. Check whether the native/third-party Instruction observes GC2 cancellation. Completion of a GC2 task also does not prove every Instruction avoided a logged exception.</p>
+
+<h2 id="variable-read-is-stale-zero-false-or-null">Variable Read Is Stale, Zero, False, or Null<a aria-label="Link to Variable Read Is Stale, Zero, False, or Null" class="anchor" href="#variable-read-is-stale-zero-false-or-null">#</a></h2>
+
+<p>Check store scope, live owner, FSM name, variable identity/path, and selected type. Direct Name Variable Number actions use PlayMaker Float; use the dedicated Integer route when needed.</p>
+
+<p>Failed PlayMaker reads preserve output. GC2 property getters may warn and return a native default because the base getter has no independent success result. Inspect diagnostics before accepting the value.</p>
+
+<h2 id="property-binder-does-not-update-in-edit-mode">Property Binder Does Not Update in Edit Mode<a aria-label="Link to Property Binder Does Not Update in Edit Mode" class="anchor" href="#property-binder-does-not-update-in-edit-mode">#</a></h2>
+
+<p>Edit Mode previews matches. Automatic value updates run in Play Mode. <strong>Synchronize Now</strong> is an explicit write/reconciliation action.</p>
+
+<p>Check Synchronize Values, direction/authority, trigger, matched types, and explicit rules. Structure synchronization is a separate advanced setting. Do not use structural deletion to solve an ordinary missing-value problem.</p>
+
+<h2 id="signal-is-missing-or-fires-twice">Signal Is Missing or Fires Twice<a aria-label="Link to Signal Is Missing or Fires Twice" class="anchor" href="#signal-is-missing-or-fires-twice">#</a></h2>
+
+<p>Compare serialized normalized Signal IDs and the configured invoker. A waiting action listens only while active; a prior Signal is not queued for it. Check receiver lifetime and repeated send nodes.</p>
+
+<p>Separate the native Signal route from named PlayMaker bridge broadcasts. Repeated native delivery is not globally deduplicated.</p>
+
+<h2 id="singleton-selector-shows-a-missing-entry">Singleton Selector Shows a Missing Entry<a aria-label="Link to Singleton Selector Shows a Missing Entry" class="anchor" href="#singleton-selector-shows-a-missing-entry">#</a></h2>
+
+<p>Open Settings and inspect the saved registration name. Version 1.1.3 preserves missing selections with a warning. It does not silently substitute another entry.</p>
+
+<p>Queries do not instantiate a manager or instance. Use the explicit creation operation and check name collisions.</p>
+
+<h2 id="optional-module-actions-are-missing">Optional Module Actions Are Missing<a aria-label="Link to Optional Module Actions Are Missing" class="anchor" href="#optional-module-actions-are-missing">#</a></h2>
+
+<p>Verify that the actual module compiles, that Project Overview detects it, and that import-time define/assembly synchronization has completed. Re-index if the palette is stale. Inspect compilation errors before adding references manually.</p>
+
+<h2 id="callable-scene-does-not-have-mappings">Callable Scene Does Not Have Mappings<a aria-label="Link to Callable Scene Does Not Have Mappings" class="anchor" href="#callable-scene-does-not-have-mappings">#</a></h2>
+
+<p>The current bundled <code>05_CallableFsmRoutines.unity</code> reuses the door event flow. Follow the <a href="examples.html#05-callable-fsm-routines">callable setup exercise</a> rather than looking for mappings that are not serialized there.</p>
+
+<h2 id="request-support">Request Support<a aria-label="Link to Request Support" class="anchor" href="#request-support">#</a></h2>
+
+<p>Use the <a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Skyward Games Discord</a>. Include integration, Unity, GC2, and PlayMaker versions; installed modules; the exact selector/action; expected/actual behavior; Console message; and a minimal reproduction. Include target/context settings and whether the issue occurs in Edit Mode, Play Mode, or a player build.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="best-practices.html"><span class="label">Previous</span><span class="title">Best Practices ←</span></a><a class="next" href="compatibility.html"><span class="label">Next</span><span class="title">Compatibility →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/troubleshooting.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#diagnostic-codes">Diagnostic Codes</a>
+<a class="toc-h2" href="#my-fsm-does-not-receive-the-event">My FSM Does Not Receive the Event</a>
+<a class="toc-h2" href="#multiple-fsms-or-renamed-components">Multiple FSMs or Renamed Components</a>
+<a class="toc-h2" href="#gc2-actions-are-busy-or-do-not-stop">GC2 Actions Are Busy or Do Not Stop</a>
+<a class="toc-h2" href="#variable-read-is-stale-zero-false-or-null">Variable Read Is Stale, Zero, False, or Null</a>
+<a class="toc-h2" href="#property-binder-does-not-update-in-edit-mode">Property Binder Does Not Update in Edit Mode</a>
+<a class="toc-h2" href="#signal-is-missing-or-fires-twice">Signal Is Missing or Fires Twice</a>
+<a class="toc-h2" href="#singleton-selector-shows-a-missing-entry">Singleton Selector Shows a Missing Entry</a>
+<a class="toc-h2" href="#optional-module-actions-are-missing">Optional Module Actions Are Missing</a>
+<a class="toc-h2" href="#callable-scene-does-not-have-mappings">Callable Scene Does Not Have Mappings</a>
+<a class="toc-h2" href="#request-support">Request Support</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

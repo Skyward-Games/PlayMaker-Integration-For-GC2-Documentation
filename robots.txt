@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/sitemap.xml

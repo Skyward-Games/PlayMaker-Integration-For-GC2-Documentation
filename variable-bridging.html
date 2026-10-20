@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variables &amp; Property Binder · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Transfer typed values explicitly, work with lists, and configure opt-in Property Binder synchronization.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/variable-bridging.html">
+<meta property="og:title" content="Variables &amp; Property Binder · PlayMaker GC2">
+<meta property="og:description" content="Transfer typed values explicitly, work with lists, and configure opt-in Property Binder synchronization.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/variable-bridging.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link active" aria-current="page" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Workflows</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="variables-and-property-binder">Variables &amp; Property Binder<a aria-label="Link to Variables &amp; Property Binder" class="anchor" href="#variables-and-property-binder">#</a></h1>
+
+<p>Choose between a one-shot transfer and a configured binding. Direct actions and properties do not establish synchronization, create missing variables, or change save ownership.</p>
+
+<h2 id="one-shot-name-variable-transfer">One-Shot Name Variable Transfer<a aria-label="Link to One-Shot Name Variable Transfer" class="anchor" href="#one-shot-name-variable-transfer">#</a></h2>
+
+<ol>
+<li>Add GC2 <strong>Local Name Variables</strong> to the data-owning object, or select a <strong>Global Name Variables</strong> asset.</li>
+<li>Create a variable with the intended type and exact name, for example <code>IsOpen</code> as Bool.</li>
+<li>In a PlayMaker state, add <strong>Set GC2 Name Variable</strong> from <code>Game Creator 2/Variables</code>.</li>
+<li>Select scope and store. Enter <code>IsOpen</code>, choose Bool, and supply the PlayMaker value.</li>
+<li>Assign <strong>Failure Event</strong> if recovery is needed. Read the value from GC2 to verify it.</li>
+</ol>
+
+<p>Use <strong>Get GC2 Name Variable</strong> for the reverse read. Failed PlayMaker reads retain their previous output; route failure rather than interpreting stale output as a fresh result.</p>
+
+<h2 id="type-mapping">Type Mapping<a aria-label="Link to Type Mapping" class="anchor" href="#type-mapping">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Workflow</th>
+<th scope="col">GC2 side</th>
+<th scope="col">PlayMaker side</th>
+<th scope="col">Policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct Name Variable actions</td>
+<td>Bool</td>
+<td>Bool</td>
+<td>Typed Boolean transfer.</td>
+</tr>
+<tr>
+<td>Direct Name Variable actions</td>
+<td>Number / double</td>
+<td>Float</td>
+<td>Finite, in-range narrowing.</td>
+</tr>
+<tr>
+<td>Direct Name Variable actions</td>
+<td>String</td>
+<td>String</td>
+<td>Null text becomes empty.</td>
+</tr>
+<tr>
+<td>Direct Name Variable actions</td>
+<td>GameObject</td>
+<td>GameObject</td>
+<td>Invalid destroyed references fail.</td>
+</tr>
+<tr>
+<td>Typed GC2 properties</td>
+<td>Number / dedicated Integer selector</td>
+<td>Float / Integer</td>
+<td>Select the numeric property explicitly.</td>
+</tr>
+<tr>
+<td>Typed GC2 properties</td>
+<td>Vector3, rotation, Color</td>
+<td>Vector3, Quaternion, Color</td>
+<td>Compatible typed selectors.</td>
+</tr>
+<tr>
+<td>Typed GC2 properties</td>
+<td>Texture, Sprite, Material, Audio, Animation</td>
+<td>Compatible object variable</td>
+<td>Preserve asset type.</td>
+</tr>
+<tr>
+<td>Evaluate GC2 Property actions</td>
+<td>Native typed PropertyGet</td>
+<td>Compatible variable</td>
+<td>One-shot; Every Frame is opt-in.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<aside class="callout warning" aria-label="Numeric routes are not interchangeable"><strong class="callout-title">Numeric routes are not interchangeable</strong><p>The direct Name Variable Number action uses PlayMaker Float. An Integer property or utility has its own contract. Do not infer Integer support in one action from an Integer selector elsewhere. Handle NaN, infinity, overflow, and incompatible types as failures.</p></aside>
+
+<h2 id="gc2-reads-and-writes-playmaker-data">GC2 Reads and Writes PlayMaker Data<a aria-label="Link to GC2 Reads and Writes PlayMaker Data" class="anchor" href="#gc2-reads-and-writes-playmaker-data">#</a></h2>
+
+<p>Choose a typed GC2 property under <code>PlayMaker/Variables</code>. Configure owner, FSM, and variable. Local references use stored identity where available with readable-name fallback; dynamic/manual references require unique names. Global access uses the appropriate PlayMaker global variable asset.</p>
+
+<p>A getter may return the base property's default after a warning. Check diagnostics when zero, false, empty text, or null is unexpected.</p>
+
+<h2 id="lists-and-collections">Lists and Collections<a aria-label="Link to Lists and Collections" class="anchor" href="#lists-and-collections">#</a></h2>
+
+<p>PlayMaker actions manipulate Local/Global GC2 List Variables: count, item access, add, set, insert, remove, remove-at, contains, index-of, and clear.</p>
+
+<p>GC2's <strong>PlayMaker/Collections</strong> utilities operate on PlayMaker collection references and transfer data to/from compatible GC2 lists. Indices must be whole numbers in range. Read-only or fixed-size destinations reject unsupported mutations. Destination and conversion checks precede transfer. See <a href="singletons-and-utilities.html#collections-and-vector-components">collection utilities</a>.</p>
+
+<h2 id="the-fsm-variable-bridge-component">The PlayMaker 2 Property Binder<a aria-label="Link to The PlayMaker 2 Property Binder" class="anchor" href="#the-fsm-variable-bridge-component">#</a></h2>
+
+<p>Add <strong>PlayMaker 2 Property Binder</strong> from <code>Game Creator/PlayMaker 2/PlayMaker 2 Property Binder</code> when ongoing synchronization is intentional. Its runtime type is <code>PlayMakerGc2BindingComponent</code>.</p>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/property-binder.png" target="_blank" rel="noopener" aria-label="Open full size: PlayMaker variables, GC2 Local Name Variables, and Property Binder inspector"><img src="assets/media/property-binder.png" alt="PlayMaker variables, GC2 Local Name Variables, and Property Binder inspector" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>The binder displays matched variables. Automatic runtime updates and manual editor synchronization are separate operations. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<h3 id="configure-synchronization">Configure Synchronization<a aria-label="Link to Configure Synchronization" class="anchor" href="#configure-synchronization">#</a></h3>
+
+<ol>
+<li>Put the FSM and intended GC2 variable store on the authoring object; create compatible variables.</li>
+<li>Add the Property Binder and inspect matched-variable status.</li>
+<li>Choose direction/master authority and trigger. Prefer one direction when one system owns the value.</li>
+<li>Configure explicit rules when automatic matching does not express the connection.</li>
+<li>Enter Play Mode and change the source. Confirm the destination, then inspect Diagnostics/Trace if needed.</li>
+</ol>
+
+<h3 id="edit-mode-and-structure-changes">Edit Mode and Structure Changes<a aria-label="Link to Edit Mode and Structure Changes" class="anchor" href="#edit-mode-and-structure-changes">#</a></h3>
+
+<p>Automatic value synchronization runs in <strong>Play Mode</strong>. Edit Mode previews matches without continuously writing values. <strong>Synchronize Now</strong> is an explicit authoring operation that can reconcile according to current settings.</p>
+
+<p>Structure synchronization is separate. <strong>Mirror Variable Structure</strong> defaults off, <strong>Structure Master</strong> to Keep Both, and deletion policy to Keep and Warn. Review authority and deletion before structural reconciliation; it can change authored variables.</p>
+
+<p>Once deliberately added, the component enables value synchronization by default with explicit two-way direction and source-change trigger. Adding a binder is a meaningful choice; ordinary access does not require it.</p>
+
+<h3 id="two-way-changes">Two-Way Changes<a aria-label="Link to Two-Way Changes" class="anchor" href="#two-way-changes">#</a></h3>
+
+<p>Recursion protection prevents immediate loopback, but two independent writers can still disagree. Define authority. Two-way binding is not a merge system; prefer one-shot boundaries for gameplay transactions.</p>
+
+<h2 id="persistence">Persistence<a aria-label="Link to Persistence" class="anchor" href="#persistence">#</a></h2>
+
+<p>GC2 and PlayMaker save their own stores according to their own configuration. A copy or binding update does not register data with a save system, mark it saveable, or restore it after loading.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="gc2-to-playmaker.html"><span class="label">Previous</span><span class="title">GC2 → PlayMaker ←</span></a><a class="next" href="events-and-signals.html"><span class="label">Next</span><span class="title">Events &amp; Signals →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/variable-bridging.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#one-shot-name-variable-transfer">One-Shot Name Variable Transfer</a>
+<a class="toc-h2" href="#type-mapping">Type Mapping</a>
+<a class="toc-h2" href="#gc2-reads-and-writes-playmaker-data">GC2 Reads and Writes PlayMaker Data</a>
+<a class="toc-h2" href="#lists-and-collections">Lists and Collections</a>
+<a class="toc-h2" href="#the-fsm-variable-bridge-component">The PlayMaker 2 Property Binder</a>
+<a class="toc-h3" href="#configure-synchronization">Configure Synchronization</a>
+<a class="toc-h3" href="#edit-mode-and-structure-changes">Edit Mode and Structure Changes</a>
+<a class="toc-h3" href="#two-way-changes">Two-Way Changes</a>
+<a class="toc-h2" href="#persistence">Persistence</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

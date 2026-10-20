@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Connect PlayMaker 2 state orchestration to native Game Creator 2 gameplay, routines, events, and variables.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/index.html">
+<meta property="og:title" content="Introduction · PlayMaker GC2">
+<meta property="og:description" content="Connect PlayMaker 2 state orchestration to native Game Creator 2 gameplay, routines, events, and variables.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/index.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link active" aria-current="page" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Start here</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<section class="hero"><span class="eyebrow">Two frameworks. One gameplay workflow.</span><h1 id="introduction">State in PlayMaker.<br><span>Gameplay in Game Creator.</span></h1><p class="hero-lead">Connect your state machines to native Actions, Conditions, Properties, and Signals—with explicit control over context, data, and execution.</p><div class="hero-actions"><a class="button primary" href="getting-started.html">Build your first workflow →</a><a class="button secondary" href="examples.html">Explore the examples</a></div><div class="feature-chips"><span>PlayMaker 2</span><span>Game Creator 2 Core</span><span>Unity 6</span><span>v1.1.3</span></div></section><p><strong>PlayMaker 2 Integration for Game Creator 2</strong> connects PlayMaker's state machines with native Game Creator 2 gameplay. An FSM decides which behavior should run; GC2 performs the authored gameplay work. Both tools keep their own graphs and data ownership.</p>
+
+<h2 id="your-first-connection">Your First Connection<a aria-label="Link to Your First Connection" class="anchor" href="#your-first-connection">#</a></h2>
+
+<ol class="flow" aria-label="Integration flow">
+<li><span class="flow-icon" aria-hidden="true">01</span><strong>GC2 interaction</strong><span>A native Trigger sends <code>Interact</code> to a named FSM.</span></li>
+<li><span class="flow-icon" aria-hidden="true">02</span><strong>PlayMaker state</strong><span>The door moves from <code>Closed</code> to <code>Opening</code>.</span></li>
+<li><span class="flow-icon" aria-hidden="true">03</span><strong>GC2 routine</strong><span><code>Run GC2 Actions</code> executes the opening behavior and waits.</span></li>
+<li><span class="flow-icon" aria-hidden="true">04</span><strong>PlayMaker completion</strong><span>The completion event moves the FSM to <code>Open</code>.</span></li>
+</ol>
+
+<p>Start with the <a href="getting-started.html#first-workflow-state-driven-door">door walkthrough</a>, then inspect the <a href="examples.html">six reference scenes</a>.</p>
+
+<h2 id="what-you-can-build">What You Can Build<a aria-label="Link to What You Can Build" class="anchor" href="#what-you-can-build">#</a></h2>
+
+<div class="cards-grid">
+<a class="card" href="playmaker-to-gc2.html">
+<div class="card-icon">↔</div>
+<h3 class="card-title">Native gameplay from FSMs</h3>
+<p class="card-text">Run GC2 Actions or inline Instructions; branch on native Conditions.</p>
+</a>
+<a class="card" href="gc2-to-playmaker.html">
+<div class="card-icon">◇</div>
+<h3 class="card-title">FSM-aware GC2 logic</h3>
+<p class="card-text">Send events, inspect states, wait for completion, and read typed FSM variables.</p>
+</a>
+<a class="card" href="variable-bridging.html">
+<div class="card-icon">≋</div>
+<h3 class="card-title">Explicit data access</h3>
+<p class="card-text">Read and write on demand, transfer lists, or opt into Property Binder synchronization.</p>
+</a>
+<a class="card" href="events-and-signals.html">
+<div class="card-icon">↗</div>
+<h3 class="card-title">Events with a clear destination</h3>
+<p class="card-text">Use local events, GC2 Signals, or typed Gameplay Events.</p>
+</a>
+<a class="card" href="callable-routines.html">
+<div class="card-icon">▶</div>
+<h3 class="card-title">Reusable FSM routines</h3>
+<p class="card-text">Expose typed inputs, outputs, completion rules, and execution policies to GC2.</p>
+</a>
+<a class="card" href="integration-workspace.html">
+<div class="card-icon">⌕</div>
+<h3 class="card-title">One integration workspace</h3>
+<p class="card-text">Discover capabilities, scaffold templates, inspect relationships, and diagnose execution.</p>
+</a>
+</div>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/bridge-overview.png" target="_blank" rel="noopener" aria-label="Open full size: PlayMaker state graph connected to a native GC2 gameplay event emitter"><img src="assets/media/bridge-overview.png" alt="PlayMaker state graph connected to a native GC2 gameplay event emitter" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>A state-driven graph and a GC2 event endpoint, reproduced from the bundled manual. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<h2 id="choose-a-learning-path">Choose a Learning Path<a aria-label="Link to Choose a Learning Path" class="anchor" href="#choose-a-learning-path">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Your goal</th>
+<th scope="col">Start here</th>
+<th scope="col">Continue with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make your first connection</td>
+<td><a href="getting-started.html">Getting Started</a></td>
+<td><a href="examples.html">Examples</a></td>
+</tr>
+<tr>
+<td>Reuse GC2 gameplay in a state</td>
+<td><a href="playmaker-to-gc2.html">PlayMaker → GC2</a></td>
+<td><a href="fsms-and-gc2.html#map-self-and-target">Context mapping</a></td>
+</tr>
+<tr>
+<td>Drive an FSM from GC2</td>
+<td><a href="gc2-to-playmaker.html">GC2 → PlayMaker</a></td>
+<td><a href="callable-routines.html">Callable Routines</a></td>
+</tr>
+<tr>
+<td>Share gameplay data</td>
+<td><a href="variable-bridging.html">Variables &amp; Property Binder</a></td>
+<td><a href="singletons-and-utilities.html">Singletons &amp; Utilities</a></td>
+</tr>
+<tr>
+<td>Diagnose a connection</td>
+<td><a href="integration-workspace.html">Integration Workspace</a></td>
+<td><a href="troubleshooting.html">Troubleshooting</a></td>
+</tr>
+<tr>
+<td>Extend with C#</td>
+<td><a href="scripting-api.html">Scripting API</a></td>
+<td><a href="compatibility.html">Compatibility</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="requirements-at-a-glance">Requirements at a Glance<a aria-label="Link to Requirements at a Glance" class="anchor" href="#requirements-at-a-glance">#</a></h2>
+
+<p>Install <strong>Game Creator 2 Core</strong> and <strong>PlayMaker 2</strong> before importing the integration. Optional GC2 modules add capabilities when installed; they are not required for the Core door example.</p>
+
+<p>This site documents <strong>v1.1.3</strong>. The original qualified baseline uses Unity <code>6000.4.6f1</code>, GC2 Core <code>2.18.60</code>, and PlayMaker <code>2.0.0-beta.80</code>. Later focused checks ran on Unity <code>6000.6.0f1</code>. See <a href="compatibility.html">Compatibility</a> for the distinction and <a href="changelog.html">Changelog</a> for the release history.</p>
+
+<aside class="callout tip" aria-label="Keep each tool&#x27;s strengths"><strong class="callout-title">Keep each tool's strengths</strong><p>Use PlayMaker for durable states and transitions. Author gameplay sequences in native GC2 Actions, and connect the two with explicit events, context, and variable transfers.</p></aside>
+<nav class="page-nav" aria-label="Page navigation"><a class="next" href="getting-started.html"><span class="label">Next</span><span class="title">Getting Started →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/index.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#your-first-connection">Your First Connection</a>
+<a class="toc-h2" href="#what-you-can-build">What You Can Build</a>
+<a class="toc-h2" href="#choose-a-learning-path">Choose a Learning Path</a>
+<a class="toc-h2" href="#requirements-at-a-glance">Requirements at a Glance</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

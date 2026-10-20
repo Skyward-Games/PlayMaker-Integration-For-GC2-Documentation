@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlayMaker → GC2 Reference · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Run native GC2 Actions and Instructions, evaluate Conditions and Properties, and control Core gameplay from an FSM.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/playmaker-to-gc2.html">
+<meta property="og:title" content="PlayMaker → GC2 Reference · PlayMaker GC2">
+<meta property="og:description" content="Run native GC2 Actions and Instructions, evaluate Conditions and Properties, and control Core gameplay from an FSM.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/playmaker-to-gc2.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link active" aria-current="page" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Workflows</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="playmaker-to-gc2-reference">PlayMaker → GC2 Reference<a aria-label="Link to PlayMaker → GC2 Reference" class="anchor" href="#playmaker-to-gc2-reference">#</a></h1>
+
+<p>Find these actions in the PlayMaker Action Browser under <strong>Game Creator 2</strong>. They execute native GC2 gameplay, evaluate authored Conditions and Properties, and perform explicit variable or Signal operations.</p>
+
+<h2 id="execution-and-ownership">Execution and Ownership<a aria-label="Link to Execution and Ownership" class="anchor" href="#execution-and-ownership">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">Category</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Run GC2 Actions</code></td>
+<td><code>Game Creator 2/Core</code></td>
+<td>Execute a referenced native GC2 Actions component.</td>
+</tr>
+<tr>
+<td><code>Run GC2 Instructions</code></td>
+<td><code>Game Creator 2/Core</code></td>
+<td>Author and run inline GC2 Instructions inside the action.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>For <code>Run GC2 Actions</code>, assign the Actions component and configure Self/Invoker and Target. Self defaults to the FSM owner; Target defaults to the referenced Actions object's owner. Inline Instructions use <code>Gc2Context</code>, whose default Target is None.</p>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Setting</th>
+<th scope="col">Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wait Until Complete on</td>
+<td>Observe the exact task before finishing this action.</td>
+</tr>
+<tr>
+<td>Wait Until Complete off</td>
+<td>Finish immediately; GC2 continues independently.</td>
+</tr>
+<tr>
+<td>If Already Running: Reject</td>
+<td>Leave the existing run unchanged and send optional Busy Event.</td>
+</tr>
+<tr>
+<td>If Already Running: Join</td>
+<td>Wait without owning, restarting, or changing its Args. Requires waiting.</td>
+</tr>
+<tr>
+<td>Cancel Owned Run On State Exit</td>
+<td>Request cooperative cancellation for a waiting run started by this invocation.</td>
+</tr>
+<tr>
+<td>Completed Event</td>
+<td>Normal terminal handling of a waited run.</td>
+</tr>
+<tr>
+<td>Busy Event</td>
+<td>Reject found an active run.</td>
+</tr>
+<tr>
+<td>Failure Event</td>
+<td>Missing/destroyed references or invalid explicit context.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<aside class="callout warning" aria-label="Completion is not a universal exception report"><strong class="callout-title">Completion is not a universal exception report</strong><p>GC2 handles its own Instruction exceptions. A normally terminated task does not prove every Instruction achieved its gameplay effect. Use GC2's Console, explicit results, and trace records to diagnose the underlying routine.</p></aside>
+
+<p>Joined and detached runs are never canceled by this action's state exit. Cancellation of an owned run is cooperative and may take effect only at an Instruction boundary.</p>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/playmaker-actions.png" target="_blank" rel="noopener" aria-label="Open full size: A PlayMaker state with GC2 Property and Character movement actions"><img src="assets/media/playmaker-actions.png" alt="A PlayMaker state with GC2 Property and Character movement actions" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>Native GC2 gameplay can execute inside a PlayMaker state. Fields depend on the action selected. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<h2 id="conditions">Conditions<a aria-label="Link to Conditions" class="anchor" href="#conditions">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">When it evaluates</th>
+<th scope="col">Normal outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Check GC2 Conditions</code></td>
+<td>Once on state entry</td>
+<td>Store Result; True Event or False Event.</td>
+</tr>
+<tr>
+<td><code>Wait Until GC2 Conditions</code></td>
+<td>At the polling interval</td>
+<td>Success when Conditions become true.</td>
+</tr>
+<tr>
+<td><code>Wait While GC2 Conditions</code></td>
+<td>At the polling interval</td>
+<td>Complete when Conditions become false.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Author Conditions inline with GC2's native editor. Configure Context so Self and Target resolve correctly.</p>
+
+<p>An evaluation error is distinct from false. Failure Event handles invalid context or evaluation failure; it must not be treated as normal false completion. Wait actions also expose timeout handling. Choose Scaled or Unscaled timing deliberately and consult the selected field's tooltip: timeout conventions differ between families.</p>
+
+<h2 id="variables-and-lists">Variables and Lists<a aria-label="Link to Variables and Lists" class="anchor" href="#variables-and-lists">#</a></h2>
+
+<p><strong>Get GC2 Name Variable</strong> and <strong>Set GC2 Name Variable</strong> live under <code>Game Creator 2/Variables</code>. Select Local or Global scope, owner/store, exact name or path, and value type. Direct transfers support Bool, Number through PlayMaker Float, String, and GameObject.</p>
+
+<p>List actions cover count, get, add, set, insert, remove, remove-at, contains, index-of, and clear for Local or Global List Variables. See <a href="variable-bridging.html">Variables &amp; Property Binder</a> for conversions and failures.</p>
+
+<h2 id="native-properties">Native Properties<a aria-label="Link to Native Properties" class="anchor" href="#native-properties">#</a></h2>
+
+<p>The typed GC2 property evaluation actions sample a native <code>PropertyGet*</code> into a PlayMaker variable. Families include Bool, Float, String, GameObject, Vector3, Color, Quaternion, Texture, Sprite, and Material.</p>
+
+<p>Evaluate once on entry unless <strong>Every Frame</strong> is intentional. A dynamic property can depend on Self/Target, so a correct selection with incorrect Context can still produce the wrong result.</p>
+
+<h2 id="signals">Signals<a aria-label="Link to Signals" class="anchor" href="#signals">#</a></h2>
+
+<p><strong>Emit GC2 Signal</strong> sends a native Signal with an Invoker. <strong>Wait for GC2 Signal</strong> listens while active; configure its identifier, received event, timeout, and stored invoker. It unsubscribes on state exit.</p>
+
+<p>See <a href="events-and-signals.html">Events &amp; Signals</a> for routing and identity.</p>
+
+<h2 id="core-gameplay-families">Core Gameplay Families<a aria-label="Link to Core Gameplay Families" class="anchor" href="#core-gameplay-families">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Family</th>
+<th scope="col">Operations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Characters</td>
+<td>Move to target/position, stop, teleport, speed.</td>
+</tr>
+<tr>
+<td>Camera and audio</td>
+<td>Change shot, shake, play, stop.</td>
+</tr>
+<tr>
+<td>Save profiles</td>
+<td>Save, load, delete, existence, current profile.</td>
+</tr>
+<tr>
+<td>Objects and interactions</td>
+<td>Pool/despawn; invoke or enable interactions.</td>
+</tr>
+<tr>
+<td>Numeric variables</td>
+<td>Get, set, change, clamp.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Use the <a href="integration-workspace.html#discover-an-action-or-pattern">Action Palette</a> to find the exact installed action and inspect its field tooltips. GC2 retains gameplay and save ownership. For module-specific wrappers, see <a href="optional-modules.html">Optional Modules</a>.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="integration-workspace.html"><span class="label">Previous</span><span class="title">Integration Workspace ←</span></a><a class="next" href="gc2-to-playmaker.html"><span class="label">Next</span><span class="title">GC2 → PlayMaker →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/playmaker-to-gc2.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#execution-and-ownership">Execution and Ownership</a>
+<a class="toc-h2" href="#conditions">Conditions</a>
+<a class="toc-h2" href="#variables-and-lists">Variables and Lists</a>
+<a class="toc-h2" href="#native-properties">Native Properties</a>
+<a class="toc-h2" href="#signals">Signals</a>
+<a class="toc-h2" href="#core-gameplay-families">Core Gameplay Families</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

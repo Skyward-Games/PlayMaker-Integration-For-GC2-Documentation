@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Actual PlayMaker GC2 release history through version 1.1.3, including validation and known limitations.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/changelog.html">
+<meta property="og:title" content="Changelog · PlayMaker GC2">
+<meta property="og:description" content="Actual PlayMaker GC2 release history through version 1.1.3, including validation and known limitations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/changelog.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link active" aria-current="page" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Learn & support</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="changelog">Changelog<a aria-label="Link to Changelog" class="anchor" href="#changelog">#</a></h1>
+
+<p>Release history for PlayMaker 2 Integration for Game Creator 2, copied from the plugin changelog through v1.1.3. Historical entries preserve their original labels; current selector paths and limitations are documented in the workflow pages.</p>
+
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/" rel="noopener" target="_blank">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" rel="noopener" target="_blank">Semantic Versioning</a>.</p>
+
+<h2 id="1-1-3-2026-10-20">[1.1.3] - 2026-10-20<a aria-label="Link to [1.1.3] - 2026-10-20" class="anchor" href="#1-1-3-2026-10-20">#</a></h2>
+
+<h3 id="added">Added<a aria-label="Link to Added" class="anchor" href="#added">#</a></h3>
+
+<ul>
+<li>Comprehensive offline documentation in PDF and self-contained HTML, bundled in the plugin's <code>Documentation/</code> folder for local access after import.</li>
+<li>Direct link to the offline PDF manual from the User Guide index.</li>
+</ul>
+
+<h3 id="fixed">Fixed<a aria-label="Link to Fixed" class="anchor" href="#fixed">#</a></h3>
+
+<ul>
+<li>Saved Singleton registration names independently of prefab and FSM template names, so renaming source assets preserves references in instructions, properties, conditions, and events. Existing settings migrate automatically in the editor.</li>
+<li>Singleton selectors preserve missing selections and display a warning instead of silently assigning the first registered Singleton.</li>
+</ul>
+
+<h3 id="validation">Validation<a aria-label="Link to Validation" class="anchor" href="#validation">#</a></h3>
+
+<ul>
+<li>Unity 6000.6.0f1: 48 focused EditMode tests and 9 focused PlayMode tests passed, including Singleton rename coverage.</li>
+<li>UPM archive verified against the plugin source files; offline documentation is included and automated tests are excluded.</li>
+</ul>
+
+<h2 id="1-1-2-2026-10-03">[1.1.2] - 2026-10-03<a aria-label="Link to [1.1.2] - 2026-10-03" class="anchor" href="#1-1-2-2026-10-03">#</a></h2>
+
+<h3 id="added-2">Added<a aria-label="Link to Added" class="anchor" href="#added-2">#</a></h3>
+
+<ul>
+<li>Dedicated instructions for waiting for a PlayMaker FSM or a selected state to finish, including equivalent Singleton shortcuts, timeout, cancellation, and result outputs.</li>
+<li>State and FSM pickers for additional properties, conditions, and instructions.</li>
+<li>Regression coverage for renamed FSM ambiguity, incompatible GC2 list destinations, additive scene ordering, unscaled waits, and persistent Singletons with multiple FSM components.</li>
+</ul>
+
+<h3 id="changed">Changed<a aria-label="Link to Changed" class="anchor" href="#changed">#</a></h3>
+
+<ul>
+<li>Clear, distinct selector names for ordinary PlayMaker FSM waits and PlayMaker Singleton FSM waits. Selector entries, descriptions, capability names, and added-instruction labels now agree.</li>
+<li>Standardized Singleton variable property names and the Send Event instruction label; retained existing class names, serialized fields, GUIDs, and capability IDs.</li>
+<li>Improved global event discovery across event assets, templates, prefabs, configured Singletons, and loaded scene FSMs.</li>
+</ul>
+
+<h3 id="fixed-2">Fixed<a aria-label="Link to Fixed" class="anchor" href="#fixed-2">#</a></h3>
+
+<ul>
+<li>Invalidated cached FSM resolution when another component is renamed to the same name.</li>
+<li>Validated Find All destination list types and hierarchy roots before clearing existing contents.</li>
+<li>Normalized Singleton registration names on lookup and accepted valid FSM components after an unconfigured template component.</li>
+<li>Hid remaining private and public GC2 test helpers from instruction and condition selectors.</li>
+<li>Restored project-only test result callbacks after domain reload.</li>
+</ul>
+
+<h3 id="validation-and-known-limitations">Validation and known limitations<a aria-label="Link to Validation and known limitations" class="anchor" href="#validation-and-known-limitations">#</a></h3>
+
+<ul>
+<li>Focused utilities suites: 42 EditMode tests and 8 PlayMode tests passed on Unity 6000.6.0f1.</li>
+<li>Player script compilation succeeded, including the PlayMaker and PlayMakerGC2 runtime assemblies.</li>
+<li>Distribution packages contain only the plugin under <code>Assets/Plugins/SkywardGames/PlayMakerGC2/</code>; automated tests are excluded by default.</li>
+<li>The broader Core sweeps are not fully green: five EditMode failures involve binding synchronization, an outdated Unity version expectation, state hierarchy expectations, and the configured Console Singleton during domain reload. Two PlayMode failures involve the existing Character fixture and native GC2 Signal delivery. See <code>Documentation/GC2_PLAYMAKER_UTILITIES.md</code> for details.</li>
+</ul>
+
+<h2 id="1-1-1-2026-09-27">[1.1.1] - 2026-09-27<a aria-label="Link to [1.1.1] - 2026-09-27" class="anchor" href="#1-1-1-2026-09-27">#</a></h2>
+
+<h3 id="added-3">Added<a aria-label="Link to Added" class="anchor" href="#added-3">#</a></h3>
+
+<ul>
+<li>Strict PlayMaker Singleton selector dropdown (<code>[PlayMakerSingletonPicker]</code>):<ul>
+<li>Replaced manual error-prone string input with a popup dropdown listing all registered singletons in the project.</li>
+<li>Included a direct "Settings" button navigating immediately to the PlayMaker GC2 Workspace Settings tab.</li>
+<li>Added warning indicators when no singletons are registered or when the selected singleton is invalid.</li>
+</ul></li>
+<li>PlayMaker Global Event Indexer and Drawer (<code>PlayMakerGlobalEventIndexer</code> &amp; <code>InstructionPlayMakerSendGlobalEventDrawer</code>):<ul>
+<li>"Choose Global Event..." dropdown populated with all project global events.</li>
+<li>Background and manual project-wide rescan button to index global events across scene FSMs, prefabs, and templates.</li>
+<li>Architectural callout warning discouraging spaghetti patterns and recommending singletons or local events where appropriate.</li>
+</ul></li>
+<li>Rate-limited runtime exception diagnostics:<ul>
+<li>Wrapped <code>InstructionPlayMakerSendEvent</code> and <code>InstructionPlayMakerSendGlobalEvent</code> execution with defensive try/catch handling.</li>
+<li>Detailed errors forwarded to <code>BridgeDiagnostic.FromExecutionFailure</code> to prevent silent failures and game-breaking unhandled exceptions.</li>
+</ul></li>
+<li>EditMode integration test suite <code>PlayMakerSingletonAndGlobalEventIntegrationTests</code> validating singleton selector and global event indexer behavior.</li>
+</ul>
+
+<h3 id="fixed-3">Fixed<a aria-label="Link to Fixed" class="anchor" href="#fixed-3">#</a></h3>
+
+<ul>
+<li>Fixed static singleton target resolution in Game Creator 2 action/instruction drawers (<code>PlayMakerGc2AdapterDrawers.GetStaticTarget</code>), eliminating false "no PlayMaker FSM found on 'Actions'" warnings and enabling FSM and Local Event pickers when targeting singleton instances.</li>
+</ul>
+
+<h2 id="1-1-0-2026-09-14">[1.1.0] - 2026-09-14<a aria-label="Link to [1.1.0] - 2026-09-14" class="anchor" href="#1-1-0-2026-09-14">#</a></h2>
+
+<h3 id="added-4">Added<a aria-label="Link to Added" class="anchor" href="#added-4">#</a></h3>
+
+<ul>
+<li>Expanded GC2 &lt;-&gt; PlayMaker core utilities:<ul>
+<li>FSM search properties and instructions: Get FSM By Name (unique requirement), Get First FSM By Name, Get First FSM, Find FSM, Find All FSMs.</li>
+<li>FSM and State execution conditions: Has FSM, FSM Running, FSM Finished, State Active.</li>
+<li>FSM execution and timing instructions: Wait For FSM Available, Wait For FSM Finished, Wait For State (with timeout and cancel conditions).</li>
+<li>Variable and Collections suite: Set, Copy, and component extraction for Vector2/Vector3/Vector4/Quaternion; full CRUD for FSM Array and ArrayList collections.</li>
+<li>FSM Singleton utilities: zero-creation guarantee singleton selector dropdown, singleton property getters, variable accessors, and lifecycle state observation.</li>
+</ul></li>
+<li>Comprehensive documentation in <code>Documentation/GC2_PLAYMAKER_UTILITIES.md</code>.</li>
+<li>EditMode and PlayMode integration tests for all new utilities and singleton bindings.</li>
+</ul>
+
+<h3 id="fixed-4">Fixed<a aria-label="Link to Fixed" class="anchor" href="#fixed-4">#</a></h3>
+
+<ul>
+<li>Resolved standalone player compilation issue in <code>InstructionRunGameplayRoutine</code> with <code>PlayMakerTemplateCompatibility.TryAssign</code>.</li>
+<li>Repaired hierarchy search fallback semantics in <code>InstructionPlayMakerFindFsm</code>.</li>
+<li>Excluded internal test types from Game Creator 2 inspector pickers.</li>
+<li>Preserved Property Binder assets created with the legacy <code>m_AutoMirrorVariables</code> field and repaired custom inspector binding.</li>
+<li>Made Property Binder authoring preview-only in Edit Mode, with an explicit Undoable synchronization action and accurate match diagnostics.</li>
+<li>Rejected ambiguous blank FSM targets when more than one PlayMaker FSM is present.</li>
+<li>Corrected Gameplay Routine start, ownership, reject, join, restart, cancellation, and fire-and-forget output behavior.</li>
+<li>Reset runtime event, routine, receiver, and trace state for domain-reload-disabled Play Mode sessions.</li>
+<li>Ensured global Gameplay Events reach every active FSM even when the receiver registry is only partially populated.</li>
+<li>Made built-in singleton query actions side-effect free, rejected unrelated name collisions, and isolated PlayMaker beta.80's editor/player template-assignment difference.</li>
+<li>Honored exact trace-buffer capacities and restored the neutral <code>General</code> category for new Gameplay Event assets.</li>
+<li>Preserved Workspace filters, added live trace refresh, scan progress, duplicate-component prevention, and consistent collapsed information panels.</li>
+<li>Corrected named bridge-event terminology, verified-version documentation, and test asset cleanup.</li>
+</ul>
+
+<h3 id="validation-2">Validation<a aria-label="Link to Validation" class="anchor" href="#validation-2">#</a></h3>
+
+<ul>
+<li>Unity <code>6000.4.6f1</code>: EditMode and PlayMode tests passed, standalone player builds compile cleanly with 0 errors.</li>
+</ul>
+
+<h2 id="1-0-0-2026-08-21">[1.0.0] - 2026-08-21<a aria-label="Link to [1.0.0] - 2026-08-21" class="anchor" href="#1-0-0-2026-08-21">#</a></h2>
+
+<h3 id="added-5">Added<a aria-label="Link to Added" class="anchor" href="#added-5">#</a></h3>
+
+<ul>
+<li>Complete bidirectional integration connecting PlayMaker 2 and Game Creator 2.</li>
+<li>Generic execution bridge: <code>Run GC2 Actions</code>, <code>Run GC2 Instructions</code>, <code>Check GC2 Conditions</code>, <code>Wait Until GC2 Conditions</code>, <code>Wait While GC2 Conditions</code>.</li>
+<li>GC2 Signal bridge: <code>Emit GC2 Signal</code> and <code>Wait For GC2 Signal</code> with <code>Scaled</code>/<code>Unscaled</code> time modes and timeout handling.</li>
+<li>GC2 Variable bridges for Local and Global Name Variables and full CRUD List Variables.</li>
+<li>PlayMaker FSM control: <code>InstructionPlayMakerSendEvent</code>, <code>InstructionPlayMakerSendGlobalEvent</code>, <code>InstructionPlayMakerRunFsm</code> (v2 Callable FSM Routine with parameter mappings), <code>InstructionPlayMakerSetFsmState</code>.</li>
+<li>PlayMaker State Lifecycle GC2 Events: <code>On PlayMaker State Enter</code>, <code>On PlayMaker State Exit</code>, <code>On PlayMaker FSM Finished</code>, <code>On Global Event</code>.</li>
+<li>PlayMaker DataTable and DataRecord operations, conditions, properties, and synchronization actions.</li>
+<li>PlayMaker EnumDefinition &amp; State Enum integration.</li>
+<li>PlayMaker UI Widget support (DataTableWidget, Meters, Target Managers, Minimap, Data Paging, Animated Lists).</li>
+<li>Deep Subsystems: Stats / Numeric variables, Save/Load Profile coordination, Object Pool, Interactables, Camera Transitions &amp; Shakes, GC2 Audio, and Character Locomotion.</li>
+<li>Unified outcome model (<code>BridgeOutcome</code> &amp; <code>BridgeExecutionResult</code> with atomic correlation IDs).</li>
+<li>Project-wide Bridge Validator Editor Window (<code>Tools &gt; PlayMaker GC2 &gt; Bridge Validator</code>) and cross-navigation inspector drawers.</li>
+<li>Comprehensive EditMode and PlayMode integration test suites.</li>
+<li>Six verified reference scenes: State-Driven Door, Guard State Flow, Shared Boundary Data, Core Game Mode, Callable FSM Routines, Enemy AI Orchestration.</li>
+</ul>
+
+<h3 id="fixed-5">Fixed<a aria-label="Link to Fixed" class="anchor" href="#fixed-5">#</a></h3>
+
+<ul>
+<li>Eliminated all runtime reflection in widget properties and events.</li>
+<li>Added support for camera shake delay and configurable ShakeEffect.</li>
+<li>Fixed asynchronous Save/Load completion coordination.</li>
+<li>Corrected Callable FSM ownership semantics on joined and detached executions.</li>
+<li>Fixed <code>WaitForGc2Signal</code> timeout handling when signal name is empty or not yet emitted.</li>
+<li>Added null safety checks for <code>TUnitAnimim</code> mannequin positioning, rotation, scale, and animator proxy creation.</li>
+<li>Replaced direct receiver enumeration in <code>Signals.cs</code> with an array snapshot to prevent collection modification exceptions during signal broadcast.</li>
+<li>Optimized async test timing, global run counter resets, and frame yields across PlayMode test suites.</li>
+<li>Corrected active FSM discovery in <code>InstructionPlayMakerSendGlobalEvent</code> using <code>FindObjectsInactive.Exclude</code>.</li>
+</ul>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="faq.html"><span class="label">Previous</span><span class="title">FAQ ←</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/changelog.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#1-1-3-2026-10-20">[1.1.3] - 2026-10-20</a>
+<a class="toc-h3" href="#added">Added</a>
+<a class="toc-h3" href="#fixed">Fixed</a>
+<a class="toc-h3" href="#validation">Validation</a>
+<a class="toc-h2" href="#1-1-2-2026-10-03">[1.1.2] - 2026-10-03</a>
+<a class="toc-h3" href="#added-2">Added</a>
+<a class="toc-h3" href="#changed">Changed</a>
+<a class="toc-h3" href="#fixed-2">Fixed</a>
+<a class="toc-h3" href="#validation-and-known-limitations">Validation and known limitations</a>
+<a class="toc-h2" href="#1-1-1-2026-09-27">[1.1.1] - 2026-09-27</a>
+<a class="toc-h3" href="#added-3">Added</a>
+<a class="toc-h3" href="#fixed-3">Fixed</a>
+<a class="toc-h2" href="#1-1-0-2026-09-14">[1.1.0] - 2026-09-14</a>
+<a class="toc-h3" href="#added-4">Added</a>
+<a class="toc-h3" href="#fixed-4">Fixed</a>
+<a class="toc-h3" href="#validation-2">Validation</a>
+<a class="toc-h2" href="#1-0-0-2026-08-21">[1.0.0] - 2026-08-21</a>
+<a class="toc-h3" href="#added-5">Added</a>
+<a class="toc-h3" href="#fixed-5">Fixed</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

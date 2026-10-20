@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events &amp; Signals · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Route local FSM events, bridge broadcasts, native GC2 Signals, and typed Gameplay Events.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/events-and-signals.html">
+<meta property="og:title" content="Events &amp; Signals · PlayMaker GC2">
+<meta property="og:description" content="Route local FSM events, bridge broadcasts, native GC2 Signals, and typed Gameplay Events.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/events-and-signals.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link active" aria-current="page" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Workflows</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="events-and-signals">Events &amp; Signals<a aria-label="Link to Events &amp; Signals" class="anchor" href="#events-and-signals">#</a></h1>
+
+<p>A local PlayMaker event, bridge name broadcast, native GC2 Signal, and typed Gameplay Event have different destinations and data contracts.</p>
+
+<h2 id="choose-the-right-message">Choose the Right Message<a aria-label="Link to Choose the Right Message" class="anchor" href="#choose-the-right-message">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Mechanism</th>
+<th scope="col">Sender / receiver</th>
+<th scope="col">Data and boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local PlayMaker event</td>
+<td>Send PlayMaker Event → one resolved FSM</td>
+<td>Event name; active graph handles transition.</td>
+</tr>
+<tr>
+<td>Named bridge broadcast</td>
+<td>Broadcast Named PlayMaker Event → active FSMs and listeners</td>
+<td>String name; not native GlobalEventAsset dispatch.</td>
+</tr>
+<tr>
+<td>Native GC2 Signal</td>
+<td>Emit GC2 Signal → native Signal listeners</td>
+<td>Signal identity and invoker.</td>
+</tr>
+<tr>
+<td>Signal wait in PlayMaker</td>
+<td>GC2 Signal → Wait for GC2 Signal</td>
+<td>Listens while active.</td>
+</tr>
+<tr>
+<td>Gameplay Event</td>
+<td>Embedded emitter or reusable event asset → configured endpoints</td>
+<td>Typed data and optional variable pre-injection.</td>
+</tr>
+<tr>
+<td>Lifecycle observation</td>
+<td>FSM state/finish → GC2 Trigger</td>
+<td>Selected lifecycle change.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="gc2-to-a-local-fsm">GC2 to a Local FSM<a aria-label="Link to GC2 to a Local FSM" class="anchor" href="#gc2-to-a-local-fsm">#</a></h2>
+
+<p>Add <strong>Send PlayMaker Event</strong> at <code>PlayMaker/Send PlayMaker Event</code>. Set Target, unique FSM Name, and exact Event Name. Create a matching transition or handler in the graph.</p>
+
+<p>PlayMaker owns delivery semantics, including startup. A disabled/inactive FSM is not a queued receiver. The bridge adds no arbitrary retry queue.</p>
+
+<h2 id="named-bridge-broadcasts">Named Bridge Broadcasts<a aria-label="Link to Named Bridge Broadcasts" class="anchor" href="#named-bridge-broadcasts">#</a></h2>
+
+<p><code>PlayMaker/Broadcast PlayMaker Global Event</code> displays <strong>Broadcast Named PlayMaker Event</strong>. Its matching Trigger, <code>PlayMaker/On PlayMaker Global Event</code>, displays <strong>On Named PlayMaker Bridge Event</strong>.</p>
+
+<p>They communicate through the integration's name-based bridge. They do not automatically forward unrelated native <code>GlobalEventAsset</code> dispatches or EventData. Use unique names and inspect active receivers when broadcasts have surprising effects.</p>
+
+<h2 id="native-gc2-signals">Native GC2 Signals<a aria-label="Link to Native GC2 Signals" class="anchor" href="#native-gc2-signals">#</a></h2>
+
+<p>Use <strong>Emit GC2 Signal</strong> under <code>Game Creator 2/Events</code>, with the Signal identity and Invoker. In GC2, configure a native Signal Trigger with the same normalized identifier.</p>
+
+<p>For the reverse direction, add <strong>Wait for GC2 Signal</strong> to a state. Configure received event, optional invoker output, and timeout. It subscribes while active and unsubscribes on exit. A Signal sent before listening starts is not a stored message.</p>
+
+<p>GC2 normalizes Signal IDs during serialization. Prefer <code>Enemy-Alerted</code> and compare normalized values on both ends.</p>
+
+<h2 id="typed-gameplay-events">Typed Gameplay Events<a aria-label="Link to Typed Gameplay Events" class="anchor" href="#typed-gameplay-events">#</a></h2>
+
+<p><strong>Emit Gameplay Event</strong> appears at <code>PlayMaker/Events/Emit Gameplay Event</code> in GC2 and as an integration action in PlayMaker. It supports embedded configuration and reusable Gameplay Event assets.</p>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/gameplay-events.png" target="_blank" rel="noopener" aria-label="Open full size: A native PlayMaker Float EventData definition and matching GC2 emitter"><img src="assets/media/gameplay-events.png" alt="A native PlayMaker Float EventData definition and matching GC2 emitter" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>Match the event data type on both endpoints. The illustrated IN_RANGE event carries Float data with value 3. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<ol>
+<li>Use embedded configuration for a one-off connection, or a reusable Gameplay Event asset for a shared definition.</li>
+<li>Select scope, target FSM or template where applicable, and exact native event endpoint.</li>
+<li>Choose the EventData type expected by that event and supply a compatible value.</li>
+<li>Configure explicit pre-injection fields if FSM variables must be initialized before dispatch.</li>
+<li>Add the matching transition/handler and verify data in Play Mode.</li>
+</ol>
+
+<p>A reusable asset records identity, metadata, endpoints, and typed target variables. It does not make an ordinary name broadcast carry EventData. Keep the richer emitter distinct from <strong>Broadcast Named PlayMaker Event</strong>.</p>
+
+<h2 id="lifecycle-triggers">Lifecycle Triggers<a aria-label="Link to Lifecycle Triggers" class="anchor" href="#lifecycle-triggers">#</a></h2>
+
+<p>Use <strong>On PlayMaker State Enter</strong>, <strong>On PlayMaker State Exit</strong>, and <strong>On PlayMaker FSM Finished</strong> when GC2 should observe lifecycle changes. Specify target/state identity; prefer full paths for nested states.</p>
+
+<h2 id="avoid-feedback-loops">Avoid Feedback Loops<a aria-label="Link to Avoid Feedback Loops" class="anchor" href="#avoid-feedback-loops">#</a></h2>
+
+<p>Give requests and notifications different names, such as <code>Request-Open</code> and <code>Door-Opened</code>. Do not echo the same event from every receiver. Repeated native delivery is not globally deduplicated. Trace one interaction, identify every sender, and remove unintended round trips.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="variable-bridging.html"><span class="label">Previous</span><span class="title">Variables &amp; Property Binder ←</span></a><a class="next" href="callable-routines.html"><span class="label">Next</span><span class="title">Callable Routines →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/events-and-signals.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#choose-the-right-message">Choose the Right Message</a>
+<a class="toc-h2" href="#gc2-to-a-local-fsm">GC2 to a Local FSM</a>
+<a class="toc-h2" href="#named-bridge-broadcasts">Named Bridge Broadcasts</a>
+<a class="toc-h2" href="#native-gc2-signals">Native GC2 Signals</a>
+<a class="toc-h2" href="#typed-gameplay-events">Typed Gameplay Events</a>
+<a class="toc-h2" href="#lifecycle-triggers">Lifecycle Triggers</a>
+<a class="toc-h2" href="#avoid-feedback-loops">Avoid Feedback Loops</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

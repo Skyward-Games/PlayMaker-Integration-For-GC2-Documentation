@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compatibility · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Qualified versions, v1.1.3 focused validation, dependencies, and known limitations.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/compatibility.html">
+<meta property="og:title" content="Compatibility · PlayMaker GC2">
+<meta property="og:description" content="Qualified versions, v1.1.3 focused validation, dependencies, and known limitations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/compatibility.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link active" aria-current="page" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Learn & support</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="compatibility">Compatibility<a aria-label="Link to Compatibility" class="anchor" href="#compatibility">#</a></h1>
+
+<p>Compatibility statements distinguish a qualified baseline from focused follow-up checks. A package manifest's Unity version is not a guarantee that every engine or dependency combination has been tested.</p>
+
+<h2 id="qualified-core-v1-baseline">Qualified Core V1 Baseline<a aria-label="Link to Qualified Core V1 Baseline" class="anchor" href="#qualified-core-v1-baseline">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Dependency</th>
+<th scope="col">Qualified version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unity</td>
+<td><code>6000.4.6f1</code></td>
+</tr>
+<tr>
+<td>Game Creator 2 Core</td>
+<td><code>2.18.60</code></td>
+</tr>
+<tr>
+<td>PlayMaker</td>
+<td><code>2.0.0-beta.80</code></td>
+</tr>
+<tr>
+<td>Optional modules in the qualified project</td>
+<td>Behavior, Dialogue, Inventory, Melee, Perception, Quests, Shooter, Stats, Traversal</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>PlayMaker beta.80 remains a beta dependency. Other Unity 6 updates, GC2 versions, later PlayMaker betas/releases, and module combinations need their own validation.</p>
+
+<h2 id="later-focused-validation">Later Focused Validation<a aria-label="Link to Later Focused Validation" class="anchor" href="#later-focused-validation">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Release</th>
+<th scope="col">Recorded validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1.0</td>
+<td>Unity 6000.4.6f1: EditMode/PlayMode checks and standalone player compilation recorded as passing.</td>
+</tr>
+<tr>
+<td>1.1.2</td>
+<td>Unity 6000.6.0f1: 42 focused EditMode tests, 8 focused PlayMode tests, and player script compilation passed.</td>
+</tr>
+<tr>
+<td>1.1.3</td>
+<td>Unity 6000.6.0f1: 48 focused EditMode tests and 9 focused PlayMode tests passed, including Singleton rename coverage. UPM contents verified.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>These are release records, not tests rerun by this documentation refresh. The 1.1.3 focused results do not establish that the complete broader suite is green.</p>
+
+<h2 id="known-broader-test-limitations">Known Broader Test Limitations<a aria-label="Link to Known Broader Test Limitations" class="anchor" href="#known-broader-test-limitations">#</a></h2>
+
+<p>The 1.1.2 release records five broader EditMode failures involving binding synchronization, a Unity version expectation, state hierarchy expectations, and the configured Console Singleton during domain reload. Two broader PlayMode failures involve the Character fixture and native GC2 Signal delivery.</p>
+
+<p>The subsequent 1.1.3 entry records focused Singleton and packaging checks; it does not claim those broader failures were all resolved. Reproduce and assess the relevant paths before relying on them in a shipping configuration.</p>
+
+<h2 id="assemblies-and-installation">Assemblies and Installation<a aria-label="Link to Assemblies and Installation" class="anchor" href="#assemblies-and-installation">#</a></h2>
+
+<p>Core requires GC2 Core and PlayMaker runtime/editor assemblies. Optional module references remain in the separately managed module integration assembly. Player runtime builds do not reference UnityEditor; automated test assemblies are separate.</p>
+
+<p>Import dependencies first. The Assets distribution belongs under <code>Assets/Plugins/SkywardGames/PlayMakerGC2/</code>; package installations use their Packages location. Do not relocate the integration to the legacy <code>Assets/Plugins/PlayMakerGC2/</code> path shown in some older guides.</p>
+
+<h2 id="behavioral-limits">Behavioral Limits<a aria-label="Link to Behavioral Limits" class="anchor" href="#behavioral-limits">#</a></h2>
+
+<ul>
+<li>Normal FSM targets require exactly one match. Blank names are ambiguous on multi-FSM objects.</li>
+<li>Cancellation is cooperative; joined/detached work is not owned by the waiting action.</li>
+<li>Direct data transfers do not synchronize stores or register save data.</li>
+<li>Property Binder automatic updates run in Play Mode; editor writes require an explicit authoring action.</li>
+<li>Named bridge broadcasts are not native GlobalEventAsset dispatches and do not carry native EventData.</li>
+<li>Dynamic targets still require runtime verification even after a clean authoring scan.</li>
+<li>Scene 05 currently reuses the door event flow, and scene 06 contains the guard flow rather than the larger hierarchy described in its README object. See <a href="examples.html">Examples</a>.</li>
+</ul>
+
+<h2 id="qualify-your-project">Qualify Your Project<a aria-label="Link to Qualify Your Project" class="anchor" href="#qualify-your-project">#</a></h2>
+
+<p>For a new supported combination, check compilation, serialization/reload, EditMode, PlayMode, example behavior, import/reimport, and a representative target-platform build. Also test the particular optional module versions, pause/cancellation behavior, scene transitions, and dynamic targets your project uses.</p>
+
+<p>This documentation publication does not add hosted HelpURL metadata to the plugin. Existing contextual help behavior follows the installed package.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="troubleshooting.html"><span class="label">Previous</span><span class="title">Troubleshooting ←</span></a><a class="next" href="faq.html"><span class="label">Next</span><span class="title">FAQ →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/compatibility.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#qualified-core-v1-baseline">Qualified Core V1 Baseline</a>
+<a class="toc-h2" href="#later-focused-validation">Later Focused Validation</a>
+<a class="toc-h2" href="#known-broader-test-limitations">Known Broader Test Limitations</a>
+<a class="toc-h2" href="#assemblies-and-installation">Assemblies and Installation</a>
+<a class="toc-h2" href="#behavioral-limits">Behavioral Limits</a>
+<a class="toc-h2" href="#qualify-your-project">Qualify Your Project</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

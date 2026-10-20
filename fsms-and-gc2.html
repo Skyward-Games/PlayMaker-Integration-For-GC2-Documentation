@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FSMs &amp; GC2 Visual Scripting · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Choose ownership, resolve FSMs safely, and map Self, Target, and context between both frameworks.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/fsms-and-gc2.html">
+<meta property="og:title" content="FSMs &amp; GC2 Visual Scripting · PlayMaker GC2">
+<meta property="og:description" content="Choose ownership, resolve FSMs safely, and map Self, Target, and context between both frameworks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/fsms-and-gc2.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link active" aria-current="page" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Start here</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="fsms-and-gc2-visual-scripting">FSMs &amp; GC2 Visual Scripting<a aria-label="Link to FSMs &amp; GC2 Visual Scripting" class="anchor" href="#fsms-and-gc2-visual-scripting">#</a></h1>
+
+<p>PlayMaker describes behavior through states, transitions, and events. Game Creator 2 describes gameplay through Triggers, Conditions, Instructions, Properties, and Variables. The integration lets these models cooperate without converting one graph into the other.</p>
+
+<h2 id="divide-responsibilities">Divide Responsibilities<a aria-label="Link to Divide Responsibilities" class="anchor" href="#divide-responsibilities">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Responsibility</th>
+<th scope="col">Recommended owner</th>
+<th scope="col">Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Durable modes: closed, opening, open</td>
+<td>PlayMaker</td>
+<td>GC2 sends an event; the FSM decides the transition.</td>
+</tr>
+<tr>
+<td>Gameplay sequence: move, animate, play sound</td>
+<td>GC2 Actions</td>
+<td>A PlayMaker state runs the component and optionally waits.</td>
+</tr>
+<tr>
+<td>A reusable FSM operation</td>
+<td>Gameplay Routine / callable FSM</td>
+<td>GC2 maps inputs, waits, then reads outputs.</td>
+</tr>
+<tr>
+<td>A gameplay value</td>
+<td>One chosen store</td>
+<td>Explicit reads/writes or configured binding.</td>
+</tr>
+<tr>
+<td>A notification</td>
+<td>The system producing the change</td>
+<td>An event or Signal informs the receiver.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/workflow-ownership.png" target="_blank" rel="noopener" aria-label="Open full size: Responsibilities of PlayMaker, the integration, and Game Creator 2"><img src="assets/media/workflow-ownership.png" alt="Responsibilities of PlayMaker, the integration, and Game Creator 2" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>PlayMaker orchestrates state; GC2 owns authored gameplay; the integration carries context, routines, events, and data. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<h2 id="resolve-the-right-fsm">Resolve the Right FSM<a aria-label="Link to Resolve the Right FSM" class="anchor" href="#resolve-the-right-fsm">#</a></h2>
+
+<p>Ordinary bridge targets combine a <strong>GameObject</strong> and <strong>FSM Name</strong>. Blank names match every FSM on that object and succeed only if there is one match. A supplied name must identify exactly one component. Missing or duplicate matches fail diagnostically.</p>
+
+<p>Dedicated <strong>Get First FSM</strong> and <strong>Get First FSM By Name</strong> search utilities deliberately offer first-match behavior. Use those only when that is the policy you intend. They do not change the strict rule used by normal targets.</p>
+
+<p>Prefer full state paths in hierarchical or parallel graphs. Two states with the same short name need different identities; the active-state Condition exposes a full-path option.</p>
+
+<h2 id="map-self-and-target">Map Self and Target<a aria-label="Link to Map Self and Target" class="anchor" href="#map-self-and-target">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Call site</th>
+<th scope="col">Default Self / Invoker</th>
+<th scope="col">Default Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Run GC2 Actions</code></td>
+<td>PlayMaker FSM owner</td>
+<td>GameObject containing the referenced Actions component</td>
+</tr>
+<tr>
+<td>Inline <code>Run GC2 Instructions</code> through <code>Gc2Context</code></td>
+<td>PlayMaker FSM owner</td>
+<td>None</td>
+</tr>
+<tr>
+<td>GC2 → PlayMaker Instruction</td>
+<td>Incoming GC2 Args</td>
+<td>Selected FSM owner, evaluated from the target property</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>An enemy FSM can invoke Actions on a shared routine object while targeting the player explicitly. Do not assume the object executing gameplay is the object being affected.</p>
+
+<p>The <strong>PlayMaker GC2 Context Provider</strong> supplies reusable gameplay context slots. When an action uses <code>ContextProvider</code>, configure the selected slot rather than duplicating object references. <code>Gc2Context</code> supports FSM owner, explicit objects, GC2 target properties, and provider-based resolution as appropriate to Self or Target.</p>
+
+<h2 id="wait-and-complete-deliberately">Wait and Complete Deliberately<a aria-label="Link to Wait and Complete Deliberately" class="anchor" href="#wait-and-complete-deliberately">#</a></h2>
+
+<p><strong>Wait Until Complete</strong> keeps an action alive while GC2 performs the task. Turning it off detaches execution: the action finishes immediately while GC2 continues. A completed action alone does not choose a new FSM state; author the event or FINISHED transition.</p>
+
+<p>An already-running Actions component uses <strong>Reject</strong> or <strong>Join</strong>. Reject leaves it unchanged; Join observes without taking ownership. A joining caller cannot cancel that run on exit.</p>
+
+<p>Cancellation is cooperative. A waiting action that owns a run can request cancellation on exit, but an Instruction must observe GC2's cancellation boundary before it stops. See <a href="playmaker-to-gc2.html#execution-and-ownership">PlayMaker → GC2</a>.</p>
+
+<h2 id="time-and-pause">Time and Pause<a aria-label="Link to Time and Pause" class="anchor" href="#time-and-pause">#</a></h2>
+
+<p>Waiting and polling operations expose <strong>Scaled</strong> and <strong>Unscaled</strong> time where supported. Choose Unscaled when a deadline must advance at <code>Time.timeScale == 0</code>. This affects the bridge's clock; it does not make every Instruction inside the routine ignore scaled time.</p>
+
+<h2 id="keep-data-ownership-clear">Keep Data Ownership Clear<a aria-label="Link to Keep Data Ownership Clear" class="anchor" href="#keep-data-ownership-clear">#</a></h2>
+
+<p>A direct read/write is a single transfer. Adding a Property Binder enables a separate synchronization workflow with configured direction and timing. Neither mechanism combines save systems. See <a href="variable-bridging.html">Variables &amp; Property Binder</a>.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="getting-started.html"><span class="label">Previous</span><span class="title">Getting Started ←</span></a><a class="next" href="integration-workspace.html"><span class="label">Next</span><span class="title">Integration Workspace →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/fsms-and-gc2.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#divide-responsibilities">Divide Responsibilities</a>
+<a class="toc-h2" href="#resolve-the-right-fsm">Resolve the Right FSM</a>
+<a class="toc-h2" href="#map-self-and-target">Map Self and Target</a>
+<a class="toc-h2" href="#wait-and-complete-deliberately">Wait and Complete Deliberately</a>
+<a class="toc-h2" href="#time-and-pause">Time and Pause</a>
+<a class="toc-h2" href="#keep-data-ownership-clear">Keep Data Ownership Clear</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

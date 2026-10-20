@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singletons &amp; Utilities · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Find FSMs, configure persistent Singletons, wait for lifecycle changes, and transfer collections.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/singletons-and-utilities.html">
+<meta property="og:title" content="Singletons &amp; Utilities · PlayMaker GC2">
+<meta property="og:description" content="Find FSMs, configure persistent Singletons, wait for lifecycle changes, and transfer collections.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/singletons-and-utilities.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link active" aria-current="page" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Reference</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="singletons-and-utilities">Singletons &amp; Utilities<a aria-label="Link to Singletons &amp; Utilities" class="anchor" href="#singletons-and-utilities">#</a></h1>
+
+<p>GC2's <strong>PlayMaker</strong> selectors provide search, lifecycle waits, variable operations, collections, and persistent Singleton shortcuts. Singletons use the same runtime operations with a registered target identity.</p>
+
+<h2 id="search-and-selection">Search and Selection<a aria-label="Link to Search and Selection" class="anchor" href="#search-and-selection">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Utility</th>
+<th scope="col">Scope / selection policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Get FSM By Name</td>
+<td>Requires one match in the selected scope.</td>
+</tr>
+<tr>
+<td>Get First FSM By Name</td>
+<td>Returns the first matching owner deliberately.</td>
+</tr>
+<tr>
+<td>Get First FSM</td>
+<td>Returns the first owner containing any FSM deliberately.</td>
+</tr>
+<tr>
+<td>Find PlayMaker FSM</td>
+<td>Search and store the result.</td>
+</tr>
+<tr>
+<td>Find All PlayMaker FSMs</td>
+<td>Collect matching owners without duplicates.</td>
+</tr>
+<tr>
+<td>FSM Count / FSM Exists</td>
+<td>Inspect a query without executing gameplay.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Search scopes include the target GameObject, its Hierarchy, and Loaded Scenes. Set the hierarchy root explicitly; a missing root is not permission to search every scene.</p>
+
+<p>Ordinary FSM targets remain strict. A first-match search is an explicit alternative, not the implicit behavior of blank FSM names.</p>
+
+<h2 id="register-a-singleton">Register a Singleton<a aria-label="Link to Register a Singleton" class="anchor" href="#register-a-singleton">#</a></h2>
+
+<ol>
+<li>Open the Integration Workspace's <strong>Settings</strong>.</li>
+<li>Add an entry to the Singleton FSM settings.</li>
+<li>Choose an FSM template or prefab source and provide its registration name.</li>
+<li>In a GC2 selector under <strong>PlayMaker/Singletons</strong>, select that registered identity. Use its Settings shortcut if configuration is missing.</li>
+<li>Use an explicit instantiation/run operation when the instance must be created. Query selectors alone do not create the manager or an instance.</li>
+<li>Verify lifecycle and persistence across the scene transitions your game uses.</li>
+</ol>
+
+<p>Version <strong>1.1.3</strong> stores registration names independently from source prefab/template names. Renaming the source asset preserves the registration identity. Missing selections remain visible with a warning rather than silently switching to the first entry.</p>
+
+<aside class="callout note" aria-label="Queries do not instantiate"><strong class="callout-title">Queries do not instantiate</strong><p>The Singleton property and existence checks are side-effect free. A null or false result can mean the runtime instance does not exist yet. Choose an explicit creation operation instead of repeatedly querying and expecting creation.</p></aside>
+
+<h2 id="singleton-shortcuts">Singleton Shortcuts<a aria-label="Link to Singleton Shortcuts" class="anchor" href="#singleton-shortcuts">#</a></h2>
+
+<p>Under <strong>PlayMaker/Singletons</strong>, use the selected entry's GameObject, FSM variables, enabled/running/finished state, events, or execution operations. Available Instructions include get/instantiate, register/unregister, enable/disable/restart/run, event sending, and waits.</p>
+
+<p>An existing unrelated object registered under the same name is a collision, not an object to replace automatically. Resolve the registration identity and target explicitly.</p>
+
+<h2 id="waits-and-lifecycle-observation">Waits and Lifecycle Observation<a aria-label="Link to Waits and Lifecycle Observation" class="anchor" href="#waits-and-lifecycle-observation">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Wait / observer</th>
+<th scope="col">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FSM Availability</td>
+<td>Wait for a target to become resolvable.</td>
+</tr>
+<tr>
+<td>FSM State</td>
+<td>Wait for a selected state/path.</td>
+</tr>
+<tr>
+<td>FSM to Finish</td>
+<td>Wait for terminal FSM completion.</td>
+</tr>
+<tr>
+<td>FSM or State to Finish</td>
+<td>Select the intended completion target.</td>
+</tr>
+<tr>
+<td>Singleton variants</td>
+<td>Equivalent wait against the registered Singleton.</td>
+</tr>
+<tr>
+<td>Available / Lost Events</td>
+<td>Observe a target appearing or being replaced/lost.</td>
+</tr>
+<tr>
+<td>Enabled / Disabled / Started / Finished Events</td>
+<td>React to lifecycle changes.</td>
+</tr>
+<tr>
+<td>Variable Changed Event</td>
+<td>React after the baseline value has been observed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Assign timeouts and result destinations where exposed. Treat canceled, timed-out, invalid-target, and successful results separately. Full state paths avoid short-name collisions in nested graphs.</p>
+
+<h2 id="collections-and-vector-components">Collections and Vector Components<a aria-label="Link to Collections and Vector Components" class="anchor" href="#collections-and-vector-components">#</a></h2>
+
+<p>The variable utilities support read, write, copy, existence/comparison, vector component extraction, and collection operations. Collection operations cover count, get/set, add/insert/remove/clear, contains, index-of, and GC2 list transfers.</p>
+
+<p>Use a compatible PlayMaker collection reference and a writable destination. Fractional/out-of-range indices fail. Fixed-size or read-only collections reject unsupported operations. Whole-list transfers validate types before mutation, so a failed conversion should not be handled as a partial successful copy.</p>
+
+<p>Vector2/Vector3/Vector4 and Quaternion component utilities expose individual numeric components where provided. Select the intended component and typed variable; these utilities do not change the simpler Name Variable action's Float-only Number contract.</p>
+
+<h2 id="troubleshooting">Troubleshooting<a aria-label="Link to Troubleshooting" class="anchor" href="#troubleshooting">#</a></h2>
+
+<p>If a selector shows a missing Singleton, inspect its saved registration name in Settings. If a query returns nothing, check instantiation, target identity, enabled state, and search scope. If a collection operation fails, inspect the destination element type before changing existing list data.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="callable-routines.html"><span class="label">Previous</span><span class="title">Callable Routines ←</span></a><a class="next" href="optional-modules.html"><span class="label">Next</span><span class="title">Optional Modules →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/singletons-and-utilities.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#search-and-selection">Search and Selection</a>
+<a class="toc-h2" href="#register-a-singleton">Register a Singleton</a>
+<a class="toc-h2" href="#singleton-shortcuts">Singleton Shortcuts</a>
+<a class="toc-h2" href="#waits-and-lifecycle-observation">Waits and Lifecycle Observation</a>
+<a class="toc-h2" href="#collections-and-vector-components">Collections and Vector Components</a>
+<a class="toc-h2" href="#troubleshooting">Troubleshooting</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

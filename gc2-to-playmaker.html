@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GC2 → PlayMaker Reference · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Reference verified PlayMaker Instructions, Conditions, lifecycle Events, and typed Properties in GC2.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/gc2-to-playmaker.html">
+<meta property="og:title" content="GC2 → PlayMaker Reference · PlayMaker GC2">
+<meta property="og:description" content="Reference verified PlayMaker Instructions, Conditions, lifecycle Events, and typed Properties in GC2.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/gc2-to-playmaker.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link active" aria-current="page" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Workflows</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="gc2-to-playmaker-reference">GC2 → PlayMaker Reference<a aria-label="Link to GC2 → PlayMaker Reference" class="anchor" href="#gc2-to-playmaker-reference">#</a></h1>
+
+<p>Native Instructions, Conditions, Events, and Properties appear below <strong>PlayMaker</strong> in Game Creator 2 selectors. Paths below reflect the current implementation.</p>
+
+<h2 id="instructions">Instructions<a aria-label="Link to Instructions" class="anchor" href="#instructions">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Selector path</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlayMaker/Send PlayMaker Event</code></td>
+<td>Send a local event to one strictly resolved FSM.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Broadcast PlayMaker Global Event</code></td>
+<td>Displayed as <strong>Broadcast Named PlayMaker Event</strong>; broadcast a name.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Run PlayMaker FSM</code></td>
+<td>Execute a scene or prefab FSM with mappings and lifecycle handling.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Routines/Run Gameplay Routine</code></td>
+<td>Execute a reusable Gameplay Routine asset.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Enable PlayMaker FSM</code></td>
+<td>Enable the selected component.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Disable PlayMaker FSM</code></td>
+<td>Disable the selected component.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Restart PlayMaker FSM</code></td>
+<td>Restart the selected FSM.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/State/Wait for PlayMaker FSM State</code></td>
+<td>Wait for a state with timeout/cancellation.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/State/Wait for PlayMaker FSM or State to Finish</code></td>
+<td>Wait for the selected completion target.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Find/Find PlayMaker FSM</code></td>
+<td>Store a search result in a GC2 property destination.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Find/Find All PlayMaker FSMs</code></td>
+<td>Collect matching owners into a compatible list.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="send-playmaker-event">Send PlayMaker Event<a aria-label="Link to Send PlayMaker Event" class="anchor" href="#send-playmaker-event">#</a></h3>
+
+<p>Configure <strong>Target</strong>, <strong>FSM Name</strong>, and <strong>Event Name</strong>. Leave the FSM name blank only when the target has exactly one FSM. The graph decides whether the event causes a transition.</p>
+
+<p>Delivery follows native PlayMaker active/startup behavior. The bridge does not add a deferred queue for arbitrary disabled components. Verify the enabled state and event handler before sending.</p>
+
+<h3 id="broadcast-named-playmaker-event">Broadcast Named PlayMaker Event<a aria-label="Link to Broadcast Named PlayMaker Event" class="anchor" href="#broadcast-named-playmaker-event">#</a></h3>
+
+<p>This broadcasts a string name to active PlayMaker FSM components and bridge listeners. It does not dispatch a native <code>GlobalEventAsset</code> or carry native EventData. Use <a href="events-and-signals.html#typed-gameplay-events">Gameplay Events</a> for typed event data.</p>
+
+<h3 id="run-and-wait">Run and Wait<a aria-label="Link to Run and Wait" class="anchor" href="#run-and-wait">#</a></h3>
+
+<p>Use <a href="callable-routines.html">Callable Routines</a> for mappings and lifecycle policies. Use a state wait when the graph owns the work and GC2 only needs to observe it. Keep success, timeout, canceled, and invalid-target outcomes separate where exposed.</p>
+
+<h2 id="conditions">Conditions<a aria-label="Link to Conditions" class="anchor" href="#conditions">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Selector path</th>
+<th scope="col">Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlayMaker/State/Has PlayMaker FSM</code></td>
+<td>Target resolves.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Is PlayMaker FSM Enabled</code></td>
+<td>Component is enabled.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/State/Is PlayMaker FSM Running</code></td>
+<td>FSM is actively running.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/State/Is PlayMaker FSM Finished</code></td>
+<td>FSM has finished.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Is PlayMaker State Active</code></td>
+<td>State is active; prefer full-path matching in nested graphs.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Variables/Enum Equals</code></td>
+<td>Enum equality.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Variables/Enum Compare</code></td>
+<td>Enum comparison with selected operator.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Other utility Conditions cover uniqueness, state existence, variables, collections, and Singletons. See <a href="singletons-and-utilities.html">Singletons &amp; Utilities</a>.</p>
+
+<h2 id="events-and-triggers">Events and Triggers<a aria-label="Link to Events and Triggers" class="anchor" href="#events-and-triggers">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Selector path</th>
+<th scope="col">Observes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlayMaker/On PlayMaker State Enter</code></td>
+<td>Entry into a selected state.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/On PlayMaker State Exit</code></td>
+<td>Exit from a selected state.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/On PlayMaker FSM Finished</code></td>
+<td>FSM completion.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/On PlayMaker Global Event</code></td>
+<td>Displayed as <strong>On Named PlayMaker Bridge Event</strong>; bridge name broadcasts.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>These are GC2 Trigger events. Utility Events additionally observe availability/loss, state changes, enabled/disabled state, and variable changes. A first baseline observation is not automatically a gameplay change notification.</p>
+
+<h2 id="typed-variable-properties">Typed Variable Properties<a aria-label="Link to Typed Variable Properties" class="anchor" href="#typed-variable-properties">#</a></h2>
+
+<p>Choose <code>PlayMaker/Variables</code> in a compatible GC2 property field. Getter/setter availability depends on the property's type.</p>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Selector suffix</th>
+<th scope="col">PlayMaker data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Bool</code>, <code>Number</code>, <code>Integer</code>, <code>String</code></td>
+<td>Scalars; Number uses PlayMaker Float.</td>
+</tr>
+<tr>
+<td><code>Game Object</code></td>
+<td>GameObject reference.</td>
+</tr>
+<tr>
+<td><code>Vector3</code></td>
+<td>Compatible vector-based fields.</td>
+</tr>
+<tr>
+<td><code>Quaternion</code></td>
+<td>Compatible rotation fields.</td>
+</tr>
+<tr>
+<td><code>Color</code>, <code>Texture</code>, <code>Sprite</code>, <code>Material</code></td>
+<td>Typed values and asset references.</td>
+</tr>
+<tr>
+<td><code>Audio</code>, <code>Animation</code></td>
+<td>AudioClip / AnimationClip references.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Local references need an owner, FSM identity, and variable identity. Global access references the appropriate PlayMaker global variable asset where exposed. Missing getters may return the native default after warning; zero/false/null does not prove successful resolution.</p>
+
+<p>State properties appear under <code>PlayMaker/State</code>: <strong>Current State</strong>, <strong>FSM Enabled</strong>, <strong>FSM Running</strong>, and <strong>FSM Finished</strong>.</p>
+
+<h2 id="extended-playmaker-systems">Extended PlayMaker Systems<a aria-label="Link to Extended PlayMaker Systems" class="anchor" href="#extended-playmaker-systems">#</a></h2>
+
+<p>Selectors also expose PlayMaker Data Tables, Enums, Save &amp; Load, object pooling, Interactions, and Widgets. Data Table operations cover row CRUD, cell reads/writes, search, sorting, and save/load. Widget operations include meters, selected rows, paging, animated lists, target managers, and minimaps.</p>
+
+<p>These operate on the corresponding <strong>PlayMaker</strong> subsystem objects. They are distinct from optional GC2 module adapters and do not automatically synchronize save systems.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="playmaker-to-gc2.html"><span class="label">Previous</span><span class="title">PlayMaker → GC2 ←</span></a><a class="next" href="variable-bridging.html"><span class="label">Next</span><span class="title">Variables &amp; Property Binder →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/gc2-to-playmaker.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#instructions">Instructions</a>
+<a class="toc-h3" href="#send-playmaker-event">Send PlayMaker Event</a>
+<a class="toc-h3" href="#broadcast-named-playmaker-event">Broadcast Named PlayMaker Event</a>
+<a class="toc-h3" href="#run-and-wait">Run and Wait</a>
+<a class="toc-h2" href="#conditions">Conditions</a>
+<a class="toc-h2" href="#events-and-triggers">Events and Triggers</a>
+<a class="toc-h2" href="#typed-variable-properties">Typed Variable Properties</a>
+<a class="toc-h2" href="#extended-playmaker-systems">Extended PlayMaker Systems</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

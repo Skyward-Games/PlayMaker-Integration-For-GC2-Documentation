@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Answers about dependencies, FSM targeting, saves, modules, synchronization, and support.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/faq.html">
+<meta property="og:title" content="FAQ · PlayMaker GC2">
+<meta property="og:description" content="Answers about dependencies, FSM targeting, saves, modules, synchronization, and support.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/faq.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link active" aria-current="page" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Learn & support</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="faq">FAQ<a aria-label="Link to FAQ" class="anchor" href="#faq">#</a></h1>
+
+<h2 id="do-i-need-playmaker-and-game-creator-2">Do I Need PlayMaker and Game Creator 2?<a aria-label="Link to Do I Need PlayMaker and Game Creator 2?" class="anchor" href="#do-i-need-playmaker-and-game-creator-2">#</a></h2>
+
+<p>Yes. Install both separately before importing the integration. GC2 optional modules are required only for the corresponding module workflows.</p>
+
+<h2 id="does-this-convert-fsms-into-gc2-graphs">Does This Convert FSMs into GC2 Graphs?<a aria-label="Link to Does This Convert FSMs into GC2 Graphs?" class="anchor" href="#does-this-convert-fsms-into-gc2-graphs">#</a></h2>
+
+<p>No automatic graph conversion is part of this workflow. Keep both native authoring models and connect them through explicit execution, data, and event boundaries.</p>
+
+<h2 id="does-it-support-playmaker-1-9-or-every-unity-6-release">Does It Support PlayMaker 1.9 or Every Unity 6 Release?<a aria-label="Link to Does It Support PlayMaker 1.9 or Every Unity 6 Release?" class="anchor" href="#does-it-support-playmaker-1-9-or-every-unity-6-release">#</a></h2>
+
+<p>The qualified baseline uses PlayMaker <code>2.0.0-beta.80</code>. No support claim is made here for PlayMaker 1.9 or every Unity 6 update. See <a href="compatibility.html">Compatibility</a> for exact versions and later focused checks.</p>
+
+<h2 id="can-i-leave-the-fsm-name-blank">Can I Leave the FSM Name Blank?<a aria-label="Link to Can I Leave the FSM Name Blank?" class="anchor" href="#can-i-leave-the-fsm-name-blank">#</a></h2>
+
+<p>Only when the target has exactly one matching FSM. Use a unique name for multi-FSM objects. Dedicated first-match search utilities are an explicit alternative.</p>
+
+<h2 id="can-gc2-wait-for-playmaker">Can GC2 Wait for PlayMaker?<a aria-label="Link to Can GC2 Wait for PlayMaker?" class="anchor" href="#can-gc2-wait-for-playmaker">#</a></h2>
+
+<p>Yes. Use state/completion waits, <strong>Run PlayMaker FSM</strong>, or a reusable <strong>Gameplay Routine</strong> depending on ownership and the result boundary. See <a href="callable-routines.html">Callable Routines</a>.</p>
+
+<h2 id="can-playmaker-run-gc2-module-gameplay">Can PlayMaker Run GC2 Module Gameplay?<a aria-label="Link to Can PlayMaker Run GC2 Module Gameplay?" class="anchor" href="#can-playmaker-run-gc2-module-gameplay">#</a></h2>
+
+<p>Yes, by executing native GC2 Actions/Instructions or evaluating Conditions for installed modules, and through supported module adapters. The module remains responsible for its own gameplay and data. See <a href="optional-modules.html">Optional Modules</a>.</p>
+
+<h2 id="are-variables-automatically-shared-or-saved">Are Variables Automatically Shared or Saved?<a aria-label="Link to Are Variables Automatically Shared or Saved?" class="anchor" href="#are-variables-automatically-shared-or-saved">#</a></h2>
+
+<p>A direct property or action performs one transfer. Ongoing synchronization requires an explicitly added/configured Property Binder. GC2 and PlayMaker retain their own save ownership.</p>
+
+<h2 id="why-does-property-binder-only-preview-in-edit-mode">Why Does Property Binder Only Preview in Edit Mode?<a aria-label="Link to Why Does Property Binder Only Preview in Edit Mode?" class="anchor" href="#why-does-property-binder-only-preview-in-edit-mode">#</a></h2>
+
+<p>Automatic value updates run in Play Mode. <strong>Synchronize Now</strong> is the intentional editor write/reconciliation operation; review direction and structure settings first.</p>
+
+<h2 id="does-a-singleton-query-create-the-instance">Does a Singleton Query Create the Instance?<a aria-label="Link to Does a Singleton Query Create the Instance?" class="anchor" href="#does-a-singleton-query-create-the-instance">#</a></h2>
+
+<p>No. Query selectors are side-effect free. Use an explicit creation operation. Version 1.1.3 keeps registration names independent of source asset names and preserves missing selections with warnings.</p>
+
+<h2 id="are-the-six-scenes-all-complete-product-examples">Are the Six Scenes All Complete Product Examples?<a aria-label="Link to Are the Six Scenes All Complete Product Examples?" class="anchor" href="#are-the-six-scenes-all-complete-product-examples">#</a></h2>
+
+<p>They are small reference scenes. The current callable and enemy-AI scene names overstate their serialized configuration; <a href="examples.html">Examples</a> explains the actual contents and provides a callable setup exercise.</p>
+
+<h2 id="does-publishing-this-site-change-my-installed-plugin">Does Publishing This Site Change My Installed Plugin?<a aria-label="Link to Does Publishing This Site Change My Installed Plugin?" class="anchor" href="#does-publishing-this-site-change-my-installed-plugin">#</a></h2>
+
+<p>No. This repository contains documentation sources, generated pages, media, and build/check tools. It does not modify the plugin or create a new Unity distribution.</p>
+
+<h2 id="where-do-i-get-help">Where Do I Get Help?<a aria-label="Link to Where Do I Get Help?" class="anchor" href="#where-do-i-get-help">#</a></h2>
+
+<p>Start with <a href="troubleshooting.html">Troubleshooting</a>, then contact the <a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Skyward Games Discord</a> with exact versions, configuration, diagnostics, and a minimal reproduction.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="compatibility.html"><span class="label">Previous</span><span class="title">Compatibility ←</span></a><a class="next" href="changelog.html"><span class="label">Next</span><span class="title">Changelog →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/faq.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#do-i-need-playmaker-and-game-creator-2">Do I Need PlayMaker and Game Creator 2?</a>
+<a class="toc-h2" href="#does-this-convert-fsms-into-gc2-graphs">Does This Convert FSMs into GC2 Graphs?</a>
+<a class="toc-h2" href="#does-it-support-playmaker-1-9-or-every-unity-6-release">Does It Support PlayMaker 1.9 or Every Unity 6 Release?</a>
+<a class="toc-h2" href="#can-i-leave-the-fsm-name-blank">Can I Leave the FSM Name Blank?</a>
+<a class="toc-h2" href="#can-gc2-wait-for-playmaker">Can GC2 Wait for PlayMaker?</a>
+<a class="toc-h2" href="#can-playmaker-run-gc2-module-gameplay">Can PlayMaker Run GC2 Module Gameplay?</a>
+<a class="toc-h2" href="#are-variables-automatically-shared-or-saved">Are Variables Automatically Shared or Saved?</a>
+<a class="toc-h2" href="#why-does-property-binder-only-preview-in-edit-mode">Why Does Property Binder Only Preview in Edit Mode?</a>
+<a class="toc-h2" href="#does-a-singleton-query-create-the-instance">Does a Singleton Query Create the Instance?</a>
+<a class="toc-h2" href="#are-the-six-scenes-all-complete-product-examples">Are the Six Scenes All Complete Product Examples?</a>
+<a class="toc-h2" href="#does-publishing-this-site-change-my-installed-plugin">Does Publishing This Site Change My Installed Plugin?</a>
+<a class="toc-h2" href="#where-do-i-get-help">Where Do I Get Help?</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>

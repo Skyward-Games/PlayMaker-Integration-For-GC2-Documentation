@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Callable Routines · PlayMaker 2 Integration for Game Creator 2</title>
+<meta name="description" content="Execute scene and prefab FSMs and author reusable Gameplay Routine assets with typed inputs and outputs.">
+<meta name="theme-color" content="#f4faff">
+<link rel="canonical" href="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/callable-routines.html">
+<meta property="og:title" content="Callable Routines · PlayMaker GC2">
+<meta property="og:description" content="Execute scene and prefab FSMs and author reusable Gameplay Routine assets with typed inputs and outputs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/callable-routines.html">
+<meta property="og:image" content="https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/assets/media/bridge-overview.png">
+<link rel="icon" href="assets/media/product-icon.png" type="image/png">
+<script>try{const t=localStorage.getItem('playmaker-gc2-docs-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light';}</script>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><div class="topbar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><button class="menu-btn" data-menu type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="docs-sidebar" aria-label="Documentation sidebar">
+<button class="sidebar-close" data-close-menu type="button">Close menu ×</button><a class="brand" href="index.html" aria-label="PlayMaker documentation home"><img class="brand-logo" src="assets/media/product-icon.png" width="42" height="42" alt=""><span><span class="brand-title">PlayMaker Integration</span><span class="brand-subtitle">Game Creator 2 Module</span></span></a><span class="version-label">Documentation <strong>v1.1.3</strong></span>
+<div class="search-wrap"><label class="sr-only" for="page-search">Filter documentation pages</label><input class="search" id="page-search" data-search type="search" placeholder="Filter pages…  /" aria-describedby="search-status"><p id="search-status" class="search-status" role="status" aria-live="polite"></p></div>
+<nav class="nav" aria-label="Documentation"><section class="nav-group"><h2 class="nav-group-title">Start here</h2><a class="nav-link" href="index.html">Introduction</a><a class="nav-link" href="getting-started.html">Getting Started</a><a class="nav-link" href="fsms-and-gc2.html">FSMs &amp; GC2</a><a class="nav-link" href="integration-workspace.html">Integration Workspace</a></section><section class="nav-group"><h2 class="nav-group-title">Workflows</h2><a class="nav-link" href="playmaker-to-gc2.html">PlayMaker → GC2</a><a class="nav-link" href="gc2-to-playmaker.html">GC2 → PlayMaker</a><a class="nav-link" href="variable-bridging.html">Variables &amp; Property Binder</a><a class="nav-link" href="events-and-signals.html">Events &amp; Signals</a><a class="nav-link active" aria-current="page" href="callable-routines.html">Callable Routines</a></section><section class="nav-group"><h2 class="nav-group-title">Reference</h2><a class="nav-link" href="singletons-and-utilities.html">Singletons &amp; Utilities</a><a class="nav-link" href="optional-modules.html">Optional Modules</a><a class="nav-link" href="scripting-api.html">Scripting API</a></section><section class="nav-group"><h2 class="nav-group-title">Learn & support</h2><a class="nav-link" href="examples.html">Examples &amp; Walkthroughs</a><a class="nav-link" href="best-practices.html">Best Practices</a><a class="nav-link" href="troubleshooting.html">Troubleshooting</a><a class="nav-link" href="compatibility.html">Compatibility</a><a class="nav-link" href="faq.html">FAQ</a><a class="nav-link" href="changelog.html">Changelog</a></section></nav>
+<div class="sidebar-actions"><button class="theme-toggle" data-theme-toggle type="button"><span aria-hidden="true" class="icon">◐</span><span class="label">Theme</span></button><a class="source-link" href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation" target="_blank" rel="noopener">Documentation on GitHub ↗</a></div>
+<div class="sidebar-footer"><p>Skyward Games</p><div class="social-links">
+<a href="https://skywardgames.com.br/" rel="noopener" target="_blank">Website</a>
+<a href="https://discord.gg/DTXjRH5TVz" rel="noopener" target="_blank">Support Discord</a>
+<a href="https://www.youtube.com/@skywardgames-youtube" rel="noopener" target="_blank">YouTube</a>
+<a href="https://x.com/skyward_games" rel="noopener" target="_blank">Twitter/X</a>
+</div></div>
+</aside>
+<div class="content"><main class="page" id="main-content" tabindex="-1">
+<div class="page-meta"><span>Workflows</span><span>PlayMaker GC2 · v1.1.3</span></div>
+<h1 id="callable-routines">Callable Routines<a aria-label="Link to Callable Routines" class="anchor" href="#callable-routines">#</a></h1>
+
+<p>Use a callable FSM when GC2 should invoke a bounded PlayMaker operation and receive outputs. Use a reusable <strong>Gameplay Routine</strong> asset when that operation needs a shared definition of inputs, outputs, completion, and execution policy.</p>
+
+<h2 id="choose-an-entry-point">Choose an Entry Point<a aria-label="Link to Choose an Entry Point" class="anchor" href="#choose-an-entry-point">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Entry</th>
+<th scope="col">Configuration lives in</th>
+<th scope="col">Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlayMaker/Run PlayMaker FSM</code></td>
+<td>GC2 Instruction</td>
+<td>Direct scene/prefab calls with input/output mappings.</td>
+</tr>
+<tr>
+<td><code>PlayMaker/Routines/Run Gameplay Routine</code></td>
+<td>Gameplay Routine asset plus call-site values</td>
+<td>Reuse a named, typed operation across callers.</td>
+</tr>
+<tr>
+<td>Send PlayMaker Event</td>
+<td>Event sender and FSM graph</td>
+<td>An unbounded state machine that owns its own lifetime.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="call-a-scene-or-prefab-fsm">Call a Scene or Prefab FSM<a aria-label="Link to Call a Scene or Prefab FSM" class="anchor" href="#call-a-scene-or-prefab-fsm">#</a></h2>
+
+<ol>
+<li>Add <strong>Run PlayMaker FSM</strong> in a GC2 Actions list.</li>
+<li>Choose Scene Object or Prefab source. Assign the target or prefab and a unique FSM Name.</li>
+<li>Select execution mode deliberately. Restart is the serialized default; use a non-disruptive policy when another caller owns the FSM.</li>
+<li>Map input values into existing, compatible FSM variables. Map outputs to compatible GC2 destinations.</li>
+<li>Enable <strong>Wait Until Complete</strong> when the following GC2 Instructions depend on the result.</li>
+<li>Configure timeout/time mode, lifecycle management, cancellation, and prefab cleanup as appropriate.</li>
+<li>Author a real FSM finish path and test both normal completion and interruption.</li>
+</ol>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Setting</th>
+<th scope="col">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Restart / Start</td>
+<td>Request the corresponding native start behavior; review whether an existing run is affected.</td>
+</tr>
+<tr>
+<td>Reject</td>
+<td>Do not accept a conflicting active execution.</td>
+</tr>
+<tr>
+<td>Join</td>
+<td>Observe existing execution without taking ownership.</td>
+</tr>
+<tr>
+<td>Lifecycle/cleanup policy</td>
+<td>Choose whether an owned run stops, stays running, or its owned instance is destroyed.</td>
+</tr>
+<tr>
+<td>Prefab Auto Destroy</td>
+<td>Cleanup for a spawned instance according to the execution path.</td>
+</tr>
+<tr>
+<td>Timeout and Time Mode</td>
+<td>Bound waiting using the selected clock.</td>
+</tr>
+<tr>
+<td>Input / Output mappings</td>
+<td>Typed transfer at the call boundary; not ongoing binding.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>The instruction also exposes specialized execution policies in its mode selector. Inspect the field descriptions when using Start If Stopped, Restart Owned, Join Current, or Send Start Event And Join; they express different ownership/start intent.</p>
+
+<h2 id="author-a-gameplay-routine-asset">Author a Gameplay Routine Asset<a aria-label="Link to Author a Gameplay Routine Asset" class="anchor" href="#author-a-gameplay-routine-asset">#</a></h2>
+
+<figure class="media-figure"><a class="media-link" href="assets/media/gameplay-routines.png" target="_blank" rel="noopener" aria-label="Open full size: Gameplay Routine inspector with target, completion, parameters, and execution rules"><img src="assets/media/gameplay-routines.png" alt="Gameplay Routine inspector with target, completion, parameters, and execution rules" width="1950" height="1300" loading="lazy" decoding="async"></a><figcaption>A reusable routine records the target FSM, typed boundary data, completion rule, and execution policy. <span class="media-hint">Open image for full size ↗</span></figcaption></figure>
+
+<ol>
+<li>Open <strong>Gameplay Routines</strong> in the workspace and create/select a routine asset.</li>
+<li>Choose a target FSM object/prefab reference or FSM template. Configure its name and optional entry state.</li>
+<li>Define completion through <strong>FSM Finished</strong>, <strong>State Reached</strong>, <strong>Event Received</strong>, or the available combined rule.</li>
+<li>Add input/output definitions and bind them to existing FSM variables. Mark inputs required when omission should fail validation.</li>
+<li>Set execution policy, timeout, and cancellation. The asset defaults to Wait Until Finished, a 5-second timeout, and cancellation enabled.</li>
+<li>Add <strong>Run Gameplay Routine</strong> in GC2, assign the asset, configure target override if needed, and fill the typed call parameters.</li>
+<li>Validate the asset and run it in Play Mode. Inspect <strong>Store Success</strong> and trace outcomes before consuming outputs.</li>
+</ol>
+
+<p>A routine asset's object/prefab reference identifies its FSM definition; do not assume it uses the direct callable instruction's prefab-instantiation lifecycle. Configure and verify the actual runtime target, or use the explicit Prefab source on <strong>Run PlayMaker FSM</strong> when that is required.</p>
+
+<h2 id="execution-policies">Execution Policies<a aria-label="Link to Execution Policies" class="anchor" href="#execution-policies">#</a></h2>
+
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table">
+<table>
+<thead>
+<tr>
+<th scope="col">Gameplay Routine policy</th>
+<th scope="col">Intent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wait Until Finished</td>
+<td>Own a new invocation and wait for completion.</td>
+</tr>
+<tr>
+<td>Run And Forget</td>
+<td>Start and return without a synchronous result boundary.</td>
+</tr>
+<tr>
+<td>Join Existing</td>
+<td>Observe a compatible tracked invocation; do not inject new inputs into its run.</td>
+</tr>
+<tr>
+<td>Restart Existing</td>
+<td>Apply the runner's restart/ownership handling before a new invocation.</td>
+</tr>
+<tr>
+<td>Reject If Running</td>
+<td>Refuse conflicting execution.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Joining is not a general attachment to any unrelated running native FSM. A compatible tracked invocation is required. A detached call cannot provide outputs immediately; consume results only at an actual completion boundary.</p>
+
+<p>The Gameplay Routine runner uses realtime for its timeout measurement. This differs from the Scaled/Unscaled selector on the direct callable FSM instruction.</p>
+
+<h2 id="test-the-failure-paths">Test the Failure Paths<a aria-label="Link to Test the Failure Paths" class="anchor" href="#test-the-failure-paths">#</a></h2>
+
+<p>Test missing targets, ambiguous names, required inputs, incompatible mappings, busy/join/restart policies, timeout, cancellation, and cleanup. A state named <code>Done</code> alone is not necessarily an FSM finish; choose State Reached explicitly if that is the routine's contract.</p>
+
+<p>See <a href="examples.html#05-callable-fsm-routines">Examples</a> for the current state of the bundled callable example and a verified setup exercise.</p>
+<nav class="page-nav" aria-label="Page navigation"><a class="prev" href="events-and-signals.html"><span class="label">Previous</span><span class="title">Events &amp; Signals ←</span></a><a class="next" href="singletons-and-utilities.html"><span class="label">Next</span><span class="title">Singletons &amp; Utilities →</span></a></nav>
+<footer class="page-footer"><span>© Skyward Games · PlayMaker GC2</span><a href="https://github.com/Skyward-Games/PlayMaker-Integration-For-GC2-Documentation/blob/main/docs-source/callable-routines.md" target="_blank" rel="noopener">Edit this page ↗</a></footer>
+</main><aside class="toc" aria-label="On this page"><span class="toc-title">On this page</span><nav><a class="toc-h2" href="#choose-an-entry-point">Choose an Entry Point</a>
+<a class="toc-h2" href="#call-a-scene-or-prefab-fsm">Call a Scene or Prefab FSM</a>
+<a class="toc-h2" href="#author-a-gameplay-routine-asset">Author a Gameplay Routine Asset</a>
+<a class="toc-h2" href="#execution-policies">Execution Policies</a>
+<a class="toc-h2" href="#test-the-failure-paths">Test the Failure Paths</a></nav><a class="back-to-top" href="#main-content">Back to top ↑</a></aside>
+</div></div><div class="mobile-scrim" data-scrim aria-hidden="true"></div>
+</body>
+</html>
