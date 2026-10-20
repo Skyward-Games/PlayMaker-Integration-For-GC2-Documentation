@@ -1,9 +1,15 @@
 # Changelog
 
-Release history for PlayMaker 2 Integration for Game Creator 2, copied from the plugin changelog through v1.1.3. Historical entries preserve their original labels; current selector paths and limitations are documented in the workflow pages.
+Documentation website updates and release history for PlayMaker 2 Integration for Game Creator 2. Plugin release history is copied from the plugin changelog through v1.1.3. Historical entries preserve their original labels; current selector paths and limitations are documented in the workflow pages.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Documentation Website — 2026-10-20
+
+### Added
+- Published online documentation for the package, complementing its included offline PDF and self-contained HTML manuals.
+- Added a Documentation & Artwork Disclosure confirming that all artwork featuring the Game Creator 2 (GC2) symbol was duly authorized by Marti and follows Game Creator's publication and branding guidelines.
 
 ## [1.1.3] - 2026-10-20
 

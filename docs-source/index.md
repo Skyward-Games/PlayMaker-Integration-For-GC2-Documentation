@@ -43,6 +43,14 @@ Install **Game Creator 2 Core** and **PlayMaker 2** before importing the integra
 
 This site documents **v1.1.3**. The original qualified baseline uses Unity `6000.4.6f1`, GC2 Core `2.18.60`, and PlayMaker `2.0.0-beta.80`. Later focused checks ran on Unity `6000.6.0f1`. See [Compatibility](compatibility.md) for the distinction and [Changelog](changelog.md) for the release history.
 
+## Documentation & Artwork Disclosure
+
+::: note Package documentation and authorized artwork
+Offline documentation in PDF and self-contained HTML is included with the package. Online documentation is also available for the package on this website.
+
+All artwork featuring the Game Creator 2 (GC2) symbol was duly authorized by Marti and follows Game Creator's publication and branding guidelines.
+:::
+
 ::: tip Keep each tool's strengths
 Use PlayMaker for durable states and transitions. Author gameplay sequences in native GC2 Actions, and connect the two with explicit events, context, and variable transfers.
 :::

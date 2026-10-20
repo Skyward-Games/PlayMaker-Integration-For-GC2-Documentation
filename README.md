@@ -6,6 +6,12 @@ English documentation for **PlayMaker GC2 v1.1.3**, by Skyward Games.
 - [Support Discord](https://discord.gg/DTXjRH5TVz)
 - [Skyward Games](https://skywardgames.com.br/)
 
+## Documentation & Artwork Disclosure
+
+Offline documentation in PDF and self-contained HTML is included with the package. Online documentation is also available for the package on the [official documentation website](https://skyward-games.github.io/PlayMaker-Integration-For-GC2-Documentation/).
+
+All artwork featuring the Game Creator 2 (GC2) symbol was duly authorized by Marti and follows Game Creator's publication and branding guidelines.
+
 ## Contents
 
 Eighteen pages cover installation, framework ownership and context, the Integration Workspace, both scripting directions, variables and Property Binder, events, callable routines, Singletons, utilities, optional modules, C#, six reference scenes, troubleshooting, compatibility, and release history.

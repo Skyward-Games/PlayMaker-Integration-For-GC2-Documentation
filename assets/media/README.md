@@ -2,6 +2,8 @@
 
 These PNG assets were extracted without image editing from the plugin's bundled self-contained HTML manual for PlayMaker GC2 v1.1.3, with publication authorized as part of this documentation refresh.
 
+All artwork featuring the Game Creator 2 (GC2) symbol was duly authorized by Marti and follows Game Creator's publication and branding guidelines.
+
 | Asset | Original embedded image |
 | --- | --- |
 | product-icon.png | PlayMaker GC2 Icon |
